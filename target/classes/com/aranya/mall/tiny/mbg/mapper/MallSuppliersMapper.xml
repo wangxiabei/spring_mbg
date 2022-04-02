@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.mbg.mapper.MallSuppliersMapper">
+  <resultMap id="BaseResultMap" type="com.aranya.mall.tiny.mbg.model.MallSuppliers">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="is_exchanged" jdbcType="INTEGER" property="isExchanged" />
+    <result column="exchanged" jdbcType="VARCHAR" property="exchanged" />
+    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="county_id" jdbcType="INTEGER" property="countyId" />
+    <result column="service_qq" jdbcType="VARCHAR" property="serviceQq" />
+    <result column="is_extract" jdbcType="INTEGER" property="isExtract" />
+    <result column="after_sale_phone" jdbcType="VARCHAR" property="afterSalePhone" />
+    <result column="after_sale_qq" jdbcType="VARCHAR" property="afterSaleQq" />
+    <result column="extract_site" jdbcType="VARCHAR" property="extractSite" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, admin_id, department_id, status, phone, remark, deleted_at, created_at, 
+    updated_at, pay_type, realname, mobile, address, is_exchanged, exchanged, province_id, 
+    city_id, county_id, service_qq, is_extract, after_sale_phone, after_sale_qq, extract_site
+  </sql>
+  <select id="selectByExample" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mall_suppliers
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_suppliers
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mall_suppliers
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliersExample">
+    delete from mall_suppliers
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliers">
+    insert into mall_suppliers (name, admin_id, department_id, 
+      status, phone, remark, 
+      deleted_at, created_at, updated_at, 
+      pay_type, realname, mobile, 
+      address, is_exchanged, exchanged, 
+      province_id, city_id, county_id, 
+      service_qq, is_extract, after_sale_phone, 
+      after_sale_qq, extract_site)
+    values (#{name,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{payType,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{isExchanged,jdbcType=INTEGER}, #{exchanged,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{countyId,jdbcType=INTEGER}, 
+      #{serviceQq,jdbcType=VARCHAR}, #{isExtract,jdbcType=INTEGER}, #{afterSalePhone,jdbcType=VARCHAR}, 
+      #{afterSaleQq,jdbcType=VARCHAR}, #{extractSite,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliers">
+    insert into mall_suppliers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="isExchanged != null">
+        is_exchanged,
+      </if>
+      <if test="exchanged != null">
+        exchanged,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+      <if test="serviceQq != null">
+        service_qq,
+      </if>
+      <if test="isExtract != null">
+        is_extract,
+      </if>
+      <if test="afterSalePhone != null">
+        after_sale_phone,
+      </if>
+      <if test="afterSaleQq != null">
+        after_sale_qq,
+      </if>
+      <if test="extractSite != null">
+        extract_site,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isExchanged != null">
+        #{isExchanged,jdbcType=INTEGER},
+      </if>
+      <if test="exchanged != null">
+        #{exchanged,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceQq != null">
+        #{serviceQq,jdbcType=VARCHAR},
+      </if>
+      <if test="isExtract != null">
+        #{isExtract,jdbcType=INTEGER},
+      </if>
+      <if test="afterSalePhone != null">
+        #{afterSalePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="afterSaleQq != null">
+        #{afterSaleQq,jdbcType=VARCHAR},
+      </if>
+      <if test="extractSite != null">
+        #{extractSite,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliersExample" resultType="java.lang.Long">
+    select count(*) from mall_suppliers
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mall_suppliers
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null">
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isExchanged != null">
+        is_exchanged = #{record.isExchanged,jdbcType=INTEGER},
+      </if>
+      <if test="record.exchanged != null">
+        exchanged = #{record.exchanged,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null">
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.countyId != null">
+        county_id = #{record.countyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceQq != null">
+        service_qq = #{record.serviceQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isExtract != null">
+        is_extract = #{record.isExtract,jdbcType=INTEGER},
+      </if>
+      <if test="record.afterSalePhone != null">
+        after_sale_phone = #{record.afterSalePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterSaleQq != null">
+        after_sale_qq = #{record.afterSaleQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extractSite != null">
+        extract_site = #{record.extractSite,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mall_suppliers
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      pay_type = #{record.payType,jdbcType=VARCHAR},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      is_exchanged = #{record.isExchanged,jdbcType=INTEGER},
+      exchanged = #{record.exchanged,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      county_id = #{record.countyId,jdbcType=INTEGER},
+      service_qq = #{record.serviceQq,jdbcType=VARCHAR},
+      is_extract = #{record.isExtract,jdbcType=INTEGER},
+      after_sale_phone = #{record.afterSalePhone,jdbcType=VARCHAR},
+      after_sale_qq = #{record.afterSaleQq,jdbcType=VARCHAR},
+      extract_site = #{record.extractSite,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliers">
+    update mall_suppliers
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isExchanged != null">
+        is_exchanged = #{isExchanged,jdbcType=INTEGER},
+      </if>
+      <if test="exchanged != null">
+        exchanged = #{exchanged,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceQq != null">
+        service_qq = #{serviceQq,jdbcType=VARCHAR},
+      </if>
+      <if test="isExtract != null">
+        is_extract = #{isExtract,jdbcType=INTEGER},
+      </if>
+      <if test="afterSalePhone != null">
+        after_sale_phone = #{afterSalePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="afterSaleQq != null">
+        after_sale_qq = #{afterSaleQq,jdbcType=VARCHAR},
+      </if>
+      <if test="extractSite != null">
+        extract_site = #{extractSite,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aranya.mall.tiny.mbg.model.MallSuppliers">
+    update mall_suppliers
+    set name = #{name,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      is_exchanged = #{isExchanged,jdbcType=INTEGER},
+      exchanged = #{exchanged,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      county_id = #{countyId,jdbcType=INTEGER},
+      service_qq = #{serviceQq,jdbcType=VARCHAR},
+      is_extract = #{isExtract,jdbcType=INTEGER},
+      after_sale_phone = #{afterSalePhone,jdbcType=VARCHAR},
+      after_sale_qq = #{afterSaleQq,jdbcType=VARCHAR},
+      extract_site = #{extractSite,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

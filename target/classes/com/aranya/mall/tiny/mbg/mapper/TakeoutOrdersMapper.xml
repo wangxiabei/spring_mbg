@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.mbg.mapper.TakeoutOrdersMapper">
+  <resultMap id="BaseResultMap" type="com.aranya.mall.tiny.mbg.model.TakeoutOrders" autoMapping="true">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="restaurant_id" jdbcType="INTEGER" property="restaurantId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="amount" jdbcType="NUMERIC" property="amount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="charge_id" jdbcType="VARCHAR" property="chargeId" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="pay_at" jdbcType="TIMESTAMP" property="payAt" />
+    <result column="delivery_type" jdbcType="INTEGER" property="deliveryType" />
+    <result column="booking_delivery_at" jdbcType="VARCHAR" property="bookingDeliveryAt" />
+    <result column="is_ontime" jdbcType="INTEGER" property="isOntime" />
+    <result column="tableware_count" jdbcType="INTEGER" property="tablewareCount" />
+    <result column="tableware_price" jdbcType="NUMERIC" property="tablewarePrice" />
+    <result column="package_count" jdbcType="INTEGER" property="packageCount" />
+    <result column="package_price" jdbcType="NUMERIC" property="packagePrice" />
+    <result column="tableware_amount" jdbcType="NUMERIC" property="tablewareAmount" />
+    <result column="package_amount" jdbcType="NUMERIC" property="packageAmount" />
+    <result column="delivery_amount" jdbcType="NUMERIC" property="deliveryAmount" />
+    <result column="taste_amount" jdbcType="NUMERIC" property="tasteAmount" />
+    <result column="refund_reason" jdbcType="VARCHAR" property="refundReason" />
+    <result column="refund_price" jdbcType="NUMERIC" property="refundPrice" />
+    <result column="refund_apply_at" jdbcType="TIMESTAMP" property="refundApplyAt" />
+    <result column="refund_success_at" jdbcType="TIMESTAMP" property="refundSuccessAt" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="pay_account" jdbcType="VARCHAR" property="payAccount" />
+    <result column="print_num" jdbcType="INTEGER" property="printNum" />
+    <result column="deliveryer_id" jdbcType="INTEGER" property="deliveryerId" />
+    <result column="deliveryer_at" jdbcType="TIMESTAMP" property="deliveryerAt" />
+    <result column="original_amount" jdbcType="NUMERIC" property="originalAmount" />
+    <result column="sequence_no" jdbcType="VARCHAR" property="sequenceNo" />
+    <result column="delivery_time_id" jdbcType="INTEGER" property="deliveryTimeId" />
+    <result column="delivery_start_at" jdbcType="VARCHAR" property="deliveryStartAt" />
+    <result column="delivery_end_at" jdbcType="VARCHAR" property="deliveryEndAt" />
+    <result column="address_ids" jdbcType="VARCHAR" property="addressIds" />
+    <result column="arrange_deliveryer_at" jdbcType="TIMESTAMP" property="arrangeDeliveryerAt" />
+    <result column="receipt_app" jdbcType="VARCHAR" property="receiptApp" />
+    <result column="pingxx_order_id" jdbcType="VARCHAR" property="pingxxOrderId" />
+    <result column="client_ip" jdbcType="VARCHAR" property="clientIp" />
+    <result column="deliveryer_typee" jdbcType="INTEGER" property="deliveryerTypee" />
+    <result column="channel_type" jdbcType="VARCHAR" property="channelType" />
+    <result column="restaurant_name" jdbcType="VARCHAR" property="restaurantName" />
+    <result column="deliveryer_name" jdbcType="VARCHAR" property="deliveryerName" />
+    <result column="deliveryer_phone" jdbcType="VARCHAR" property="deliveryerPhone" />
+    <result column="deliveryer_received_order_at" jdbcType="TIMESTAMP" property="deliveryerReceivedOrderAt" />
+    <result column="order_remark" jdbcType="VARCHAR" property="orderRemark" />
+    <result column="remark_admin_id" jdbcType="INTEGER" property="remarkAdminId" />
+    <result column="meal_finished_at" jdbcType="TIMESTAMP" property="mealFinishedAt" />
+    <result column="delivery_time_type" jdbcType="INTEGER" property="deliveryTimeType" />
+    <result column="region_code" jdbcType="VARCHAR" property="regionCode" />
+    <!-- 一对一 -->
+<!--    <association property="user" javaType="com.aranya.mall.tiny.mbg.model.Users"-->
+<!--                 autoMapping="true"  column="user_id"-->
+<!--                 select="com.aranya.mall.tiny.dao.UserDao.findUserById"-->
+<!--                 fetchType="lazy"-->
+<!--    ></association>-->
+    <!-- 一对多
+    property: 表示model中对应的属性
+    column属性:表示将本次查询到的结果集中的哪个字段传给第二步查询，是根据订单ID去查询orderFood信息。
+    ofType: model类的路径
+    select: 查询的方法
+    fetchType:表示使用懒查询
+    -->
+<!--    <collection property="orderFoodsList" ofType="com.aranya.mall.tiny.mbg.model.TakeoutOrderFoods"-->
+<!--                autoMapping="true" select="com.aranya.mall.tiny.dao.TakeoutOrderFoodDao.selectOrderFoodByOrderId"-->
+<!--                column="id" fetchType="lazy">-->
+<!--    </collection>-->
+<!--    <collection property="orderFoodTastesList" ofType="com.aranya.mall.tiny.mbg.model.TakeoutOrderFoodTastes"-->
+<!--                autoMapping="true" select="com.aranya.mall.tiny.dao.TakeoutOrderFoodTasteDao.selectFoodTasteByOrderId"-->
+<!--                column="id" fetchType="lazy">-->
+<!--    </collection>-->
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, restaurant_id, department_id, order_no, amount, status, realname, phone, 
+    address, charge_id, pay_type, pay_at, delivery_type, booking_delivery_at, is_ontime, 
+    tableware_count, tableware_price, package_count, package_price, tableware_amount, 
+    package_amount, delivery_amount, taste_amount, refund_reason, refund_price, refund_apply_at, 
+    refund_success_at, remark, deleted_at, created_at, updated_at, pay_account, print_num, 
+    deliveryer_id, deliveryer_at, original_amount, sequence_no, delivery_time_id, delivery_start_at, 
+    delivery_end_at, address_ids, arrange_deliveryer_at, receipt_app, pingxx_order_id, 
+    client_ip, deliveryer_typee, channel_type, restaurant_name, deliveryer_name, deliveryer_phone, 
+    deliveryer_received_order_at, order_remark, remark_admin_id, meal_finished_at, delivery_time_type, 
+    region_code
+  </sql>
+  <select id="selectByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrdersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from takeout_orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from takeout_orders
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from takeout_orders
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrdersExample">
+    delete from takeout_orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrders">
+    insert into takeout_orders (user_id, restaurant_id, department_id, 
+      order_no, amount, status, 
+      realname, phone, address, 
+      charge_id, pay_type, pay_at, 
+      delivery_type, booking_delivery_at, is_ontime, 
+      tableware_count, tableware_price, package_count, 
+      package_price, tableware_amount, package_amount, 
+      delivery_amount, taste_amount, refund_reason, 
+      refund_price, refund_apply_at, refund_success_at, 
+      remark, deleted_at, created_at, 
+      updated_at, pay_account, print_num, 
+      deliveryer_id, deliveryer_at, original_amount, 
+      sequence_no, delivery_time_id, delivery_start_at, 
+      delivery_end_at, address_ids, arrange_deliveryer_at, 
+      receipt_app, pingxx_order_id, client_ip, 
+      deliveryer_typee, channel_type, restaurant_name, 
+      deliveryer_name, deliveryer_phone, deliveryer_received_order_at, 
+      order_remark, remark_admin_id, meal_finished_at, 
+      delivery_time_type, region_code)
+    values (#{userId,jdbcType=INTEGER}, #{restaurantId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, 
+      #{orderNo,jdbcType=VARCHAR}, #{amount,jdbcType=NUMERIC}, #{status,jdbcType=INTEGER}, 
+      #{realname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{chargeId,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, #{payAt,jdbcType=TIMESTAMP}, 
+      #{deliveryType,jdbcType=INTEGER}, #{bookingDeliveryAt,jdbcType=VARCHAR}, #{isOntime,jdbcType=INTEGER}, 
+      #{tablewareCount,jdbcType=INTEGER}, #{tablewarePrice,jdbcType=NUMERIC}, #{packageCount,jdbcType=INTEGER}, 
+      #{packagePrice,jdbcType=NUMERIC}, #{tablewareAmount,jdbcType=NUMERIC}, #{packageAmount,jdbcType=NUMERIC}, 
+      #{deliveryAmount,jdbcType=NUMERIC}, #{tasteAmount,jdbcType=NUMERIC}, #{refundReason,jdbcType=VARCHAR}, 
+      #{refundPrice,jdbcType=NUMERIC}, #{refundApplyAt,jdbcType=TIMESTAMP}, #{refundSuccessAt,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{deletedAt,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{payAccount,jdbcType=VARCHAR}, #{printNum,jdbcType=INTEGER}, 
+      #{deliveryerId,jdbcType=INTEGER}, #{deliveryerAt,jdbcType=TIMESTAMP}, #{originalAmount,jdbcType=NUMERIC}, 
+      #{sequenceNo,jdbcType=VARCHAR}, #{deliveryTimeId,jdbcType=INTEGER}, #{deliveryStartAt,jdbcType=VARCHAR}, 
+      #{deliveryEndAt,jdbcType=VARCHAR}, #{addressIds,jdbcType=VARCHAR}, #{arrangeDeliveryerAt,jdbcType=TIMESTAMP}, 
+      #{receiptApp,jdbcType=VARCHAR}, #{pingxxOrderId,jdbcType=VARCHAR}, #{clientIp,jdbcType=VARCHAR}, 
+      #{deliveryerTypee,jdbcType=INTEGER}, #{channelType,jdbcType=VARCHAR}, #{restaurantName,jdbcType=VARCHAR}, 
+      #{deliveryerName,jdbcType=VARCHAR}, #{deliveryerPhone,jdbcType=VARCHAR}, #{deliveryerReceivedOrderAt,jdbcType=TIMESTAMP}, 
+      #{orderRemark,jdbcType=VARCHAR}, #{remarkAdminId,jdbcType=INTEGER}, #{mealFinishedAt,jdbcType=TIMESTAMP}, 
+      #{deliveryTimeType,jdbcType=INTEGER}, #{regionCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrders" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long" >
+      select nextval('takeout_orders_id_seq'::regclass) as id
+    </selectKey>
+    insert into takeout_orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="restaurantId != null">
+        restaurant_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="chargeId != null">
+        charge_id,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="payAt != null">
+        pay_at,
+      </if>
+      <if test="deliveryType != null">
+        delivery_type,
+      </if>
+      <if test="bookingDeliveryAt != null">
+        booking_delivery_at,
+      </if>
+      <if test="isOntime != null">
+        is_ontime,
+      </if>
+      <if test="tablewareCount != null">
+        tableware_count,
+      </if>
+      <if test="tablewarePrice != null">
+        tableware_price,
+      </if>
+      <if test="packageCount != null">
+        package_count,
+      </if>
+      <if test="packagePrice != null">
+        package_price,
+      </if>
+      <if test="tablewareAmount != null">
+        tableware_amount,
+      </if>
+      <if test="packageAmount != null">
+        package_amount,
+      </if>
+      <if test="deliveryAmount != null">
+        delivery_amount,
+      </if>
+      <if test="tasteAmount != null">
+        taste_amount,
+      </if>
+      <if test="refundReason != null">
+        refund_reason,
+      </if>
+      <if test="refundPrice != null">
+        refund_price,
+      </if>
+      <if test="refundApplyAt != null">
+        refund_apply_at,
+      </if>
+      <if test="refundSuccessAt != null">
+        refund_success_at,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="payAccount != null">
+        pay_account,
+      </if>
+      <if test="printNum != null">
+        print_num,
+      </if>
+      <if test="deliveryerId != null">
+        deliveryer_id,
+      </if>
+      <if test="deliveryerAt != null">
+        deliveryer_at,
+      </if>
+      <if test="originalAmount != null">
+        original_amount,
+      </if>
+      <if test="sequenceNo != null">
+        sequence_no,
+      </if>
+      <if test="deliveryTimeId != null">
+        delivery_time_id,
+      </if>
+      <if test="deliveryStartAt != null">
+        delivery_start_at,
+      </if>
+      <if test="deliveryEndAt != null">
+        delivery_end_at,
+      </if>
+      <if test="addressIds != null">
+        address_ids,
+      </if>
+      <if test="arrangeDeliveryerAt != null">
+        arrange_deliveryer_at,
+      </if>
+      <if test="receiptApp != null">
+        receipt_app,
+      </if>
+      <if test="pingxxOrderId != null">
+        pingxx_order_id,
+      </if>
+      <if test="clientIp != null">
+        client_ip,
+      </if>
+      <if test="deliveryerTypee != null">
+        deliveryer_typee,
+      </if>
+      <if test="channelType != null">
+        channel_type,
+      </if>
+      <if test="restaurantName != null">
+        restaurant_name,
+      </if>
+      <if test="deliveryerName != null">
+        deliveryer_name,
+      </if>
+      <if test="deliveryerPhone != null">
+        deliveryer_phone,
+      </if>
+      <if test="deliveryerReceivedOrderAt != null">
+        deliveryer_received_order_at,
+      </if>
+      <if test="orderRemark != null">
+        order_remark,
+      </if>
+      <if test="remarkAdminId != null">
+        remark_admin_id,
+      </if>
+      <if test="mealFinishedAt != null">
+        meal_finished_at,
+      </if>
+      <if test="deliveryTimeType != null">
+        delivery_time_type,
+      </if>
+      <if test="regionCode != null">
+        region_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantId != null">
+        #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=NUMERIC},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeId != null">
+        #{chargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payAt != null">
+        #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryType != null">
+        #{deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="bookingDeliveryAt != null">
+        #{bookingDeliveryAt,jdbcType=VARCHAR},
+      </if>
+      <if test="isOntime != null">
+        #{isOntime,jdbcType=INTEGER},
+      </if>
+      <if test="tablewareCount != null">
+        #{tablewareCount,jdbcType=INTEGER},
+      </if>
+      <if test="tablewarePrice != null">
+        #{tablewarePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="packageCount != null">
+        #{packageCount,jdbcType=INTEGER},
+      </if>
+      <if test="packagePrice != null">
+        #{packagePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="tablewareAmount != null">
+        #{tablewareAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="packageAmount != null">
+        #{packageAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryAmount != null">
+        #{deliveryAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="tasteAmount != null">
+        #{tasteAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="refundReason != null">
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null">
+        #{refundPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="refundApplyAt != null">
+        #{refundApplyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundSuccessAt != null">
+        #{refundSuccessAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payAccount != null">
+        #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="printNum != null">
+        #{printNum,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryerId != null">
+        #{deliveryerId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryerAt != null">
+        #{deliveryerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalAmount != null">
+        #{originalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="sequenceNo != null">
+        #{sequenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTimeId != null">
+        #{deliveryTimeId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryStartAt != null">
+        #{deliveryStartAt,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryEndAt != null">
+        #{deliveryEndAt,jdbcType=VARCHAR},
+      </if>
+      <if test="addressIds != null">
+        #{addressIds,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangeDeliveryerAt != null">
+        #{arrangeDeliveryerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiptApp != null">
+        #{receiptApp,jdbcType=VARCHAR},
+      </if>
+      <if test="pingxxOrderId != null">
+        #{pingxxOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null">
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerTypee != null">
+        #{deliveryerTypee,jdbcType=INTEGER},
+      </if>
+      <if test="channelType != null">
+        #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantName != null">
+        #{restaurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerName != null">
+        #{deliveryerName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerPhone != null">
+        #{deliveryerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerReceivedOrderAt != null">
+        #{deliveryerReceivedOrderAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderRemark != null">
+        #{orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkAdminId != null">
+        #{remarkAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="mealFinishedAt != null">
+        #{mealFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryTimeType != null">
+        #{deliveryTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrdersExample" resultType="java.lang.Long">
+    select count(*) from takeout_orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update takeout_orders
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.restaurantId != null">
+        restaurant_id = #{record.restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.realname != null">
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargeId != null">
+        charge_id = #{record.chargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.payAt != null">
+        pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliveryType != null">
+        delivery_type = #{record.deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookingDeliveryAt != null">
+        booking_delivery_at = #{record.bookingDeliveryAt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOntime != null">
+        is_ontime = #{record.isOntime,jdbcType=INTEGER},
+      </if>
+      <if test="record.tablewareCount != null">
+        tableware_count = #{record.tablewareCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tablewarePrice != null">
+        tableware_price = #{record.tablewarePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.packageCount != null">
+        package_count = #{record.packageCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.packagePrice != null">
+        package_price = #{record.packagePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.tablewareAmount != null">
+        tableware_amount = #{record.tablewareAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.packageAmount != null">
+        package_amount = #{record.packageAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.deliveryAmount != null">
+        delivery_amount = #{record.deliveryAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.tasteAmount != null">
+        taste_amount = #{record.tasteAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.refundReason != null">
+        refund_reason = #{record.refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundPrice != null">
+        refund_price = #{record.refundPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.refundApplyAt != null">
+        refund_apply_at = #{record.refundApplyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refundSuccessAt != null">
+        refund_success_at = #{record.refundSuccessAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payAccount != null">
+        pay_account = #{record.payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printNum != null">
+        print_num = #{record.printNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliveryerId != null">
+        deliveryer_id = #{record.deliveryerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliveryerAt != null">
+        deliveryer_at = #{record.deliveryerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.originalAmount != null">
+        original_amount = #{record.originalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.sequenceNo != null">
+        sequence_no = #{record.sequenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryTimeId != null">
+        delivery_time_id = #{record.deliveryTimeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliveryStartAt != null">
+        delivery_start_at = #{record.deliveryStartAt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryEndAt != null">
+        delivery_end_at = #{record.deliveryEndAt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressIds != null">
+        address_ids = #{record.addressIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrangeDeliveryerAt != null">
+        arrange_deliveryer_at = #{record.arrangeDeliveryerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receiptApp != null">
+        receipt_app = #{record.receiptApp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pingxxOrderId != null">
+        pingxx_order_id = #{record.pingxxOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientIp != null">
+        client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryerTypee != null">
+        deliveryer_typee = #{record.deliveryerTypee,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelType != null">
+        channel_type = #{record.channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.restaurantName != null">
+        restaurant_name = #{record.restaurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryerName != null">
+        deliveryer_name = #{record.deliveryerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryerPhone != null">
+        deliveryer_phone = #{record.deliveryerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryerReceivedOrderAt != null">
+        deliveryer_received_order_at = #{record.deliveryerReceivedOrderAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderRemark != null">
+        order_remark = #{record.orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkAdminId != null">
+        remark_admin_id = #{record.remarkAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mealFinishedAt != null">
+        meal_finished_at = #{record.mealFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliveryTimeType != null">
+        delivery_time_type = #{record.deliveryTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionCode != null">
+        region_code = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update takeout_orders
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      restaurant_id = #{record.restaurantId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=NUMERIC},
+      status = #{record.status,jdbcType=INTEGER},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      charge_id = #{record.chargeId,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      delivery_type = #{record.deliveryType,jdbcType=INTEGER},
+      booking_delivery_at = #{record.bookingDeliveryAt,jdbcType=VARCHAR},
+      is_ontime = #{record.isOntime,jdbcType=INTEGER},
+      tableware_count = #{record.tablewareCount,jdbcType=INTEGER},
+      tableware_price = #{record.tablewarePrice,jdbcType=NUMERIC},
+      package_count = #{record.packageCount,jdbcType=INTEGER},
+      package_price = #{record.packagePrice,jdbcType=NUMERIC},
+      tableware_amount = #{record.tablewareAmount,jdbcType=NUMERIC},
+      package_amount = #{record.packageAmount,jdbcType=NUMERIC},
+      delivery_amount = #{record.deliveryAmount,jdbcType=NUMERIC},
+      taste_amount = #{record.tasteAmount,jdbcType=NUMERIC},
+      refund_reason = #{record.refundReason,jdbcType=VARCHAR},
+      refund_price = #{record.refundPrice,jdbcType=NUMERIC},
+      refund_apply_at = #{record.refundApplyAt,jdbcType=TIMESTAMP},
+      refund_success_at = #{record.refundSuccessAt,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      pay_account = #{record.payAccount,jdbcType=VARCHAR},
+      print_num = #{record.printNum,jdbcType=INTEGER},
+      deliveryer_id = #{record.deliveryerId,jdbcType=INTEGER},
+      deliveryer_at = #{record.deliveryerAt,jdbcType=TIMESTAMP},
+      original_amount = #{record.originalAmount,jdbcType=NUMERIC},
+      sequence_no = #{record.sequenceNo,jdbcType=VARCHAR},
+      delivery_time_id = #{record.deliveryTimeId,jdbcType=INTEGER},
+      delivery_start_at = #{record.deliveryStartAt,jdbcType=VARCHAR},
+      delivery_end_at = #{record.deliveryEndAt,jdbcType=VARCHAR},
+      address_ids = #{record.addressIds,jdbcType=VARCHAR},
+      arrange_deliveryer_at = #{record.arrangeDeliveryerAt,jdbcType=TIMESTAMP},
+      receipt_app = #{record.receiptApp,jdbcType=VARCHAR},
+      pingxx_order_id = #{record.pingxxOrderId,jdbcType=VARCHAR},
+      client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      deliveryer_typee = #{record.deliveryerTypee,jdbcType=INTEGER},
+      channel_type = #{record.channelType,jdbcType=VARCHAR},
+      restaurant_name = #{record.restaurantName,jdbcType=VARCHAR},
+      deliveryer_name = #{record.deliveryerName,jdbcType=VARCHAR},
+      deliveryer_phone = #{record.deliveryerPhone,jdbcType=VARCHAR},
+      deliveryer_received_order_at = #{record.deliveryerReceivedOrderAt,jdbcType=TIMESTAMP},
+      order_remark = #{record.orderRemark,jdbcType=VARCHAR},
+      remark_admin_id = #{record.remarkAdminId,jdbcType=INTEGER},
+      meal_finished_at = #{record.mealFinishedAt,jdbcType=TIMESTAMP},
+      delivery_time_type = #{record.deliveryTimeType,jdbcType=INTEGER},
+      region_code = #{record.regionCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrders">
+    update takeout_orders
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantId != null">
+        restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=NUMERIC},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeId != null">
+        charge_id = #{chargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payAt != null">
+        pay_at = #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryType != null">
+        delivery_type = #{deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="bookingDeliveryAt != null">
+        booking_delivery_at = #{bookingDeliveryAt,jdbcType=VARCHAR},
+      </if>
+      <if test="isOntime != null">
+        is_ontime = #{isOntime,jdbcType=INTEGER},
+      </if>
+      <if test="tablewareCount != null">
+        tableware_count = #{tablewareCount,jdbcType=INTEGER},
+      </if>
+      <if test="tablewarePrice != null">
+        tableware_price = #{tablewarePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="packageCount != null">
+        package_count = #{packageCount,jdbcType=INTEGER},
+      </if>
+      <if test="packagePrice != null">
+        package_price = #{packagePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="tablewareAmount != null">
+        tableware_amount = #{tablewareAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="packageAmount != null">
+        package_amount = #{packageAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryAmount != null">
+        delivery_amount = #{deliveryAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="tasteAmount != null">
+        taste_amount = #{tasteAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="refundReason != null">
+        refund_reason = #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null">
+        refund_price = #{refundPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="refundApplyAt != null">
+        refund_apply_at = #{refundApplyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundSuccessAt != null">
+        refund_success_at = #{refundSuccessAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payAccount != null">
+        pay_account = #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="printNum != null">
+        print_num = #{printNum,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryerId != null">
+        deliveryer_id = #{deliveryerId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryerAt != null">
+        deliveryer_at = #{deliveryerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalAmount != null">
+        original_amount = #{originalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="sequenceNo != null">
+        sequence_no = #{sequenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTimeId != null">
+        delivery_time_id = #{deliveryTimeId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryStartAt != null">
+        delivery_start_at = #{deliveryStartAt,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryEndAt != null">
+        delivery_end_at = #{deliveryEndAt,jdbcType=VARCHAR},
+      </if>
+      <if test="addressIds != null">
+        address_ids = #{addressIds,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangeDeliveryerAt != null">
+        arrange_deliveryer_at = #{arrangeDeliveryerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiptApp != null">
+        receipt_app = #{receiptApp,jdbcType=VARCHAR},
+      </if>
+      <if test="pingxxOrderId != null">
+        pingxx_order_id = #{pingxxOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null">
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerTypee != null">
+        deliveryer_typee = #{deliveryerTypee,jdbcType=INTEGER},
+      </if>
+      <if test="channelType != null">
+        channel_type = #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantName != null">
+        restaurant_name = #{restaurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerName != null">
+        deliveryer_name = #{deliveryerName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerPhone != null">
+        deliveryer_phone = #{deliveryerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryerReceivedOrderAt != null">
+        deliveryer_received_order_at = #{deliveryerReceivedOrderAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderRemark != null">
+        order_remark = #{orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkAdminId != null">
+        remark_admin_id = #{remarkAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="mealFinishedAt != null">
+        meal_finished_at = #{mealFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryTimeType != null">
+        delivery_time_type = #{deliveryTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        region_code = #{regionCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutOrders">
+    update takeout_orders
+    set user_id = #{userId,jdbcType=INTEGER},
+      restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=NUMERIC},
+      status = #{status,jdbcType=INTEGER},
+      realname = #{realname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      charge_id = #{chargeId,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_at = #{payAt,jdbcType=TIMESTAMP},
+      delivery_type = #{deliveryType,jdbcType=INTEGER},
+      booking_delivery_at = #{bookingDeliveryAt,jdbcType=VARCHAR},
+      is_ontime = #{isOntime,jdbcType=INTEGER},
+      tableware_count = #{tablewareCount,jdbcType=INTEGER},
+      tableware_price = #{tablewarePrice,jdbcType=NUMERIC},
+      package_count = #{packageCount,jdbcType=INTEGER},
+      package_price = #{packagePrice,jdbcType=NUMERIC},
+      tableware_amount = #{tablewareAmount,jdbcType=NUMERIC},
+      package_amount = #{packageAmount,jdbcType=NUMERIC},
+      delivery_amount = #{deliveryAmount,jdbcType=NUMERIC},
+      taste_amount = #{tasteAmount,jdbcType=NUMERIC},
+      refund_reason = #{refundReason,jdbcType=VARCHAR},
+      refund_price = #{refundPrice,jdbcType=NUMERIC},
+      refund_apply_at = #{refundApplyAt,jdbcType=TIMESTAMP},
+      refund_success_at = #{refundSuccessAt,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      pay_account = #{payAccount,jdbcType=VARCHAR},
+      print_num = #{printNum,jdbcType=INTEGER},
+      deliveryer_id = #{deliveryerId,jdbcType=INTEGER},
+      deliveryer_at = #{deliveryerAt,jdbcType=TIMESTAMP},
+      original_amount = #{originalAmount,jdbcType=NUMERIC},
+      sequence_no = #{sequenceNo,jdbcType=VARCHAR},
+      delivery_time_id = #{deliveryTimeId,jdbcType=INTEGER},
+      delivery_start_at = #{deliveryStartAt,jdbcType=VARCHAR},
+      delivery_end_at = #{deliveryEndAt,jdbcType=VARCHAR},
+      address_ids = #{addressIds,jdbcType=VARCHAR},
+      arrange_deliveryer_at = #{arrangeDeliveryerAt,jdbcType=TIMESTAMP},
+      receipt_app = #{receiptApp,jdbcType=VARCHAR},
+      pingxx_order_id = #{pingxxOrderId,jdbcType=VARCHAR},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      deliveryer_typee = #{deliveryerTypee,jdbcType=INTEGER},
+      channel_type = #{channelType,jdbcType=VARCHAR},
+      restaurant_name = #{restaurantName,jdbcType=VARCHAR},
+      deliveryer_name = #{deliveryerName,jdbcType=VARCHAR},
+      deliveryer_phone = #{deliveryerPhone,jdbcType=VARCHAR},
+      deliveryer_received_order_at = #{deliveryerReceivedOrderAt,jdbcType=TIMESTAMP},
+      order_remark = #{orderRemark,jdbcType=VARCHAR},
+      remark_admin_id = #{remarkAdminId,jdbcType=INTEGER},
+      meal_finished_at = #{mealFinishedAt,jdbcType=TIMESTAMP},
+      delivery_time_type = #{deliveryTimeType,jdbcType=INTEGER},
+      region_code = #{regionCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

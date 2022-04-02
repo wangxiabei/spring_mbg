@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.mbg.mapper.MallOrdersMapper">
+  <resultMap id="BaseResultMap" type="com.aranya.mall.tiny.mbg.model.MallOrders">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="amount" jdbcType="NUMERIC" property="amount" />
+    <result column="original_amount" jdbcType="NUMERIC" property="originalAmount" />
+    <result column="postage" jdbcType="NUMERIC" property="postage" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="pay_account" jdbcType="VARCHAR" property="payAccount" />
+    <result column="charge_id" jdbcType="VARCHAR" property="chargeId" />
+    <result column="delivery_service" jdbcType="VARCHAR" property="deliveryService" />
+    <result column="delivery_no" jdbcType="VARCHAR" property="deliveryNo" />
+    <result column="ship_at" jdbcType="TIMESTAMP" property="shipAt" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="refund_reason" jdbcType="VARCHAR" property="refundReason" />
+    <result column="refund_price" jdbcType="NUMERIC" property="refundPrice" />
+    <result column="refund_apply_at" jdbcType="TIMESTAMP" property="refundApplyAt" />
+    <result column="refund_success_at" jdbcType="TIMESTAMP" property="refundSuccessAt" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="pingxx_order_id" jdbcType="VARCHAR" property="pingxxOrderId" />
+    <result column="pay_at" jdbcType="TIMESTAMP" property="payAt" />
+    <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="county_name" jdbcType="VARCHAR" property="countyName" />
+    <result column="delivery_no_source" jdbcType="INTEGER" property="deliveryNoSource" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="return_status" jdbcType="INTEGER" property="returnStatus" />
+    <result column="receipt_app" jdbcType="VARCHAR" property="receiptApp" />
+    <result column="receive_at" jdbcType="TIMESTAMP" property="receiveAt" />
+    <result column="client_ip" jdbcType="VARCHAR" property="clientIp" />
+    <result column="channel_type" jdbcType="VARCHAR" property="channelType" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="order_remark" jdbcType="VARCHAR" property="orderRemark" />
+    <result column="remark_admin_id" jdbcType="INTEGER" property="remarkAdminId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, product_id, supplier_id, department_id, order_no, status, amount, original_amount, 
+    postage, pay_type, pay_account, charge_id, delivery_service, delivery_no, ship_at, 
+    realname, mobile, address, address_id, refund_reason, refund_price, refund_apply_at, 
+    refund_success_at, remark, deleted_at, created_at, updated_at, pingxx_order_id, pay_at, 
+    province_name, city_name, county_name, delivery_no_source, city_code, return_status, 
+    receipt_app, receive_at, client_ip, channel_type, order_type, order_remark, remark_admin_id
+  </sql>
+  <select id="selectByExample" parameterType="com.aranya.mall.tiny.mbg.model.MallOrdersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mall_orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_orders
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mall_orders
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aranya.mall.tiny.mbg.model.MallOrdersExample">
+    delete from mall_orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.MallOrders">
+    insert into mall_orders (user_id, product_id, supplier_id, 
+      department_id, order_no, status, 
+      amount, original_amount, postage, 
+      pay_type, pay_account, charge_id, 
+      delivery_service, delivery_no, ship_at, 
+      realname, mobile, address, 
+      address_id, refund_reason, refund_price, 
+      refund_apply_at, refund_success_at, remark, 
+      deleted_at, created_at, updated_at, 
+      pingxx_order_id, pay_at, province_name, 
+      city_name, county_name, delivery_no_source, 
+      city_code, return_status, receipt_app, 
+      receive_at, client_ip, channel_type, 
+      order_type, order_remark, remark_admin_id
+      )
+    values (#{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, 
+      #{departmentId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{amount,jdbcType=NUMERIC}, #{originalAmount,jdbcType=NUMERIC}, #{postage,jdbcType=NUMERIC}, 
+      #{payType,jdbcType=INTEGER}, #{payAccount,jdbcType=VARCHAR}, #{chargeId,jdbcType=VARCHAR}, 
+      #{deliveryService,jdbcType=VARCHAR}, #{deliveryNo,jdbcType=VARCHAR}, #{shipAt,jdbcType=TIMESTAMP}, 
+      #{realname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{addressId,jdbcType=INTEGER}, #{refundReason,jdbcType=VARCHAR}, #{refundPrice,jdbcType=NUMERIC}, 
+      #{refundApplyAt,jdbcType=TIMESTAMP}, #{refundSuccessAt,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{pingxxOrderId,jdbcType=VARCHAR}, #{payAt,jdbcType=TIMESTAMP}, #{provinceName,jdbcType=VARCHAR}, 
+      #{cityName,jdbcType=VARCHAR}, #{countyName,jdbcType=VARCHAR}, #{deliveryNoSource,jdbcType=INTEGER}, 
+      #{cityCode,jdbcType=VARCHAR}, #{returnStatus,jdbcType=INTEGER}, #{receiptApp,jdbcType=VARCHAR}, 
+      #{receiveAt,jdbcType=TIMESTAMP}, #{clientIp,jdbcType=VARCHAR}, #{channelType,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=INTEGER}, #{orderRemark,jdbcType=VARCHAR}, #{remarkAdminId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.MallOrders" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long" >
+      select nextval('mall_orders_id_seq'::regclass) as id
+    </selectKey>
+    insert into mall_orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="originalAmount != null">
+        original_amount,
+      </if>
+      <if test="postage != null">
+        postage,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="payAccount != null">
+        pay_account,
+      </if>
+      <if test="chargeId != null">
+        charge_id,
+      </if>
+      <if test="deliveryService != null">
+        delivery_service,
+      </if>
+      <if test="deliveryNo != null">
+        delivery_no,
+      </if>
+      <if test="shipAt != null">
+        ship_at,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="refundReason != null">
+        refund_reason,
+      </if>
+      <if test="refundPrice != null">
+        refund_price,
+      </if>
+      <if test="refundApplyAt != null">
+        refund_apply_at,
+      </if>
+      <if test="refundSuccessAt != null">
+        refund_success_at,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="pingxxOrderId != null">
+        pingxx_order_id,
+      </if>
+      <if test="payAt != null">
+        pay_at,
+      </if>
+      <if test="provinceName != null">
+        province_name,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="countyName != null">
+        county_name,
+      </if>
+      <if test="deliveryNoSource != null">
+        delivery_no_source,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="returnStatus != null">
+        return_status,
+      </if>
+      <if test="receiptApp != null">
+        receipt_app,
+      </if>
+      <if test="receiveAt != null">
+        receive_at,
+      </if>
+      <if test="clientIp != null">
+        client_ip,
+      </if>
+      <if test="channelType != null">
+        channel_type,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="orderRemark != null">
+        order_remark,
+      </if>
+      <if test="remarkAdminId != null">
+        remark_admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=NUMERIC},
+      </if>
+      <if test="originalAmount != null">
+        #{originalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="postage != null">
+        #{postage,jdbcType=NUMERIC},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payAccount != null">
+        #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeId != null">
+        #{chargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryService != null">
+        #{deliveryService,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNo != null">
+        #{deliveryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shipAt != null">
+        #{shipAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="refundReason != null">
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null">
+        #{refundPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="refundApplyAt != null">
+        #{refundApplyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundSuccessAt != null">
+        #{refundSuccessAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pingxxOrderId != null">
+        #{pingxxOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payAt != null">
+        #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provinceName != null">
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null">
+        #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNoSource != null">
+        #{deliveryNoSource,jdbcType=INTEGER},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnStatus != null">
+        #{returnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="receiptApp != null">
+        #{receiptApp,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAt != null">
+        #{receiveAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientIp != null">
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null">
+        #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderRemark != null">
+        #{orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkAdminId != null">
+        #{remarkAdminId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aranya.mall.tiny.mbg.model.MallOrdersExample" resultType="java.lang.Long">
+    select count(*) from mall_orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mall_orders
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplierId != null">
+        supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.originalAmount != null">
+        original_amount = #{record.originalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.postage != null">
+        postage = #{record.postage,jdbcType=NUMERIC},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.payAccount != null">
+        pay_account = #{record.payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargeId != null">
+        charge_id = #{record.chargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryService != null">
+        delivery_service = #{record.deliveryService,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryNo != null">
+        delivery_no = #{record.deliveryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipAt != null">
+        ship_at = #{record.shipAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.realname != null">
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressId != null">
+        address_id = #{record.addressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundReason != null">
+        refund_reason = #{record.refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundPrice != null">
+        refund_price = #{record.refundPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.refundApplyAt != null">
+        refund_apply_at = #{record.refundApplyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refundSuccessAt != null">
+        refund_success_at = #{record.refundSuccessAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pingxxOrderId != null">
+        pingxx_order_id = #{record.pingxxOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAt != null">
+        pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.provinceName != null">
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null">
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyName != null">
+        county_name = #{record.countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryNoSource != null">
+        delivery_no_source = #{record.deliveryNoSource,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityCode != null">
+        city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnStatus != null">
+        return_status = #{record.returnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiptApp != null">
+        receipt_app = #{record.receiptApp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveAt != null">
+        receive_at = #{record.receiveAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.clientIp != null">
+        client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelType != null">
+        channel_type = #{record.channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null">
+        order_type = #{record.orderType,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderRemark != null">
+        order_remark = #{record.orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkAdminId != null">
+        remark_admin_id = #{record.remarkAdminId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mall_orders
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=NUMERIC},
+      original_amount = #{record.originalAmount,jdbcType=NUMERIC},
+      postage = #{record.postage,jdbcType=NUMERIC},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      pay_account = #{record.payAccount,jdbcType=VARCHAR},
+      charge_id = #{record.chargeId,jdbcType=VARCHAR},
+      delivery_service = #{record.deliveryService,jdbcType=VARCHAR},
+      delivery_no = #{record.deliveryNo,jdbcType=VARCHAR},
+      ship_at = #{record.shipAt,jdbcType=TIMESTAMP},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      address_id = #{record.addressId,jdbcType=INTEGER},
+      refund_reason = #{record.refundReason,jdbcType=VARCHAR},
+      refund_price = #{record.refundPrice,jdbcType=NUMERIC},
+      refund_apply_at = #{record.refundApplyAt,jdbcType=TIMESTAMP},
+      refund_success_at = #{record.refundSuccessAt,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      pingxx_order_id = #{record.pingxxOrderId,jdbcType=VARCHAR},
+      pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      province_name = #{record.provinceName,jdbcType=VARCHAR},
+      city_name = #{record.cityName,jdbcType=VARCHAR},
+      county_name = #{record.countyName,jdbcType=VARCHAR},
+      delivery_no_source = #{record.deliveryNoSource,jdbcType=INTEGER},
+      city_code = #{record.cityCode,jdbcType=VARCHAR},
+      return_status = #{record.returnStatus,jdbcType=INTEGER},
+      receipt_app = #{record.receiptApp,jdbcType=VARCHAR},
+      receive_at = #{record.receiveAt,jdbcType=TIMESTAMP},
+      client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      channel_type = #{record.channelType,jdbcType=VARCHAR},
+      order_type = #{record.orderType,jdbcType=INTEGER},
+      order_remark = #{record.orderRemark,jdbcType=VARCHAR},
+      remark_admin_id = #{record.remarkAdminId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aranya.mall.tiny.mbg.model.MallOrders">
+    update mall_orders
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=NUMERIC},
+      </if>
+      <if test="originalAmount != null">
+        original_amount = #{originalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="postage != null">
+        postage = #{postage,jdbcType=NUMERIC},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payAccount != null">
+        pay_account = #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeId != null">
+        charge_id = #{chargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryService != null">
+        delivery_service = #{deliveryService,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNo != null">
+        delivery_no = #{deliveryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shipAt != null">
+        ship_at = #{shipAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="refundReason != null">
+        refund_reason = #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null">
+        refund_price = #{refundPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="refundApplyAt != null">
+        refund_apply_at = #{refundApplyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundSuccessAt != null">
+        refund_success_at = #{refundSuccessAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pingxxOrderId != null">
+        pingxx_order_id = #{pingxxOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payAt != null">
+        pay_at = #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provinceName != null">
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null">
+        county_name = #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNoSource != null">
+        delivery_no_source = #{deliveryNoSource,jdbcType=INTEGER},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnStatus != null">
+        return_status = #{returnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="receiptApp != null">
+        receipt_app = #{receiptApp,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAt != null">
+        receive_at = #{receiveAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientIp != null">
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null">
+        channel_type = #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderRemark != null">
+        order_remark = #{orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkAdminId != null">
+        remark_admin_id = #{remarkAdminId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aranya.mall.tiny.mbg.model.MallOrders">
+    update mall_orders
+    set user_id = #{userId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=NUMERIC},
+      original_amount = #{originalAmount,jdbcType=NUMERIC},
+      postage = #{postage,jdbcType=NUMERIC},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_account = #{payAccount,jdbcType=VARCHAR},
+      charge_id = #{chargeId,jdbcType=VARCHAR},
+      delivery_service = #{deliveryService,jdbcType=VARCHAR},
+      delivery_no = #{deliveryNo,jdbcType=VARCHAR},
+      ship_at = #{shipAt,jdbcType=TIMESTAMP},
+      realname = #{realname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      address_id = #{addressId,jdbcType=INTEGER},
+      refund_reason = #{refundReason,jdbcType=VARCHAR},
+      refund_price = #{refundPrice,jdbcType=NUMERIC},
+      refund_apply_at = #{refundApplyAt,jdbcType=TIMESTAMP},
+      refund_success_at = #{refundSuccessAt,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      pingxx_order_id = #{pingxxOrderId,jdbcType=VARCHAR},
+      pay_at = #{payAt,jdbcType=TIMESTAMP},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      county_name = #{countyName,jdbcType=VARCHAR},
+      delivery_no_source = #{deliveryNoSource,jdbcType=INTEGER},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      return_status = #{returnStatus,jdbcType=INTEGER},
+      receipt_app = #{receiptApp,jdbcType=VARCHAR},
+      receive_at = #{receiveAt,jdbcType=TIMESTAMP},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      channel_type = #{channelType,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
+      order_remark = #{orderRemark,jdbcType=VARCHAR},
+      remark_admin_id = #{remarkAdminId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

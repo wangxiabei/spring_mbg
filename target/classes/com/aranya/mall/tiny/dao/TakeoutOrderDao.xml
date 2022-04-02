@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.dao.takeout.TakeoutOrderDao">
+    <resultMap id="orderDetailResultMap" type="com.aranya.mall.tiny.dto.takeout.TakeoutOrderDetail" extends="com.aranya.mall.tiny.mbg.mapper.TakeoutOrdersMapper.BaseResultMap">
+            <collection property="orderFoodsList" ofType="com.aranya.mall.tiny.mbg.model.TakeoutOrderFoods"
+                        autoMapping="true" select="com.aranya.mall.tiny.dao.takeout.TakeoutOrderFoodDao.selectOrderFoodByOrderId"
+                        column="id" >
+            </collection>
+            <collection property="orderFoodTastesList" ofType="com.aranya.mall.tiny.mbg.model.TakeoutOrderFoodTastes"
+                        autoMapping="true" select="com.aranya.mall.tiny.dao.takeout.TakeoutOrderFoodTasteDao.selectFoodTasteByOrderId"
+                        column="id" >
+            </collection>
+    </resultMap>
+
+    <resultMap id="orderListMap" type="com.aranya.mall.tiny.dto.takeout.TakeoutOrderDto">
+    </resultMap>
+
+    <select id="getDetail" resultMap="orderDetailResultMap">
+        select * from takeout_orders where id=#{id}
+    </select>
+    <select id="getList" resultMap="com.aranya.mall.tiny.mbg.mapper.TakeoutOrdersMapper.BaseResultMap">
+        select * from takeout_orders
+        WHERE
+        deleted_at is null
+        <if test="queryParam.orderNo!=null and queryParam.orderNo!=''">
+            AND order_no = #{queryParam.orderNo}
+        </if>
+        <if test="queryParam.status!=null">
+            AND `status` = #{queryParam.status}
+        </if>
+<!--        <if test="queryParam.sourceType!=null">-->
+<!--            AND source_type = #{queryParam.sourceType}-->
+<!--        </if>-->
+<!--        <if test="queryParam.orderType!=null">-->
+<!--            AND order_type = #{queryParam.orderType}-->
+<!--        </if>-->
+<!--        <if test="queryParam.createTime!=null and queryParam.createTime!=''">-->
+<!--            AND create_time LIKE concat(#{queryParam.createTime},"%")-->
+<!--        </if>-->
+<!--        <if test="queryParam.receiverKeyword!=null and queryParam.receiverKeyword!=''">-->
+<!--            AND (-->
+<!--            receiver_name LIKE concat("%",#{queryParam.receiverKeyword},"%")-->
+<!--            OR receiver_phone LIKE concat("%",#{queryParam.receiverKeyword},"%")-->
+<!--            )-->
+<!--        </if>-->
+        order by id desc
+
+    </select>
+</mapper>

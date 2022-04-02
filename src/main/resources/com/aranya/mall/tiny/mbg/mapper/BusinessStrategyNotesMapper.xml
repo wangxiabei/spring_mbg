@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.mbg.mapper.BusinessStrategyNotesMapper">
+  <resultMap id="BaseResultMap" type="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotes">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="position" jdbcType="INTEGER" property="position" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="collect_count" jdbcType="INTEGER" property="collectCount" />
+    <result column="share_type" jdbcType="INTEGER" property="shareType" />
+    <result column="show_goback" jdbcType="INTEGER" property="showGoback" />
+    <result column="forge_collect_count" jdbcType="INTEGER" property="forgeCollectCount" />
+    <result column="region_code" jdbcType="VARCHAR" property="regionCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, sub_title, content, position, admin_id, deleted_at, status, image, created_at, 
+    updated_at, collect_count, share_type, show_goback, forge_collect_count, region_code
+  </sql>
+  <select id="selectByExample" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_strategy_notes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_strategy_notes
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from business_strategy_notes
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotesExample">
+    delete from business_strategy_notes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotes">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_strategy_notes (title, sub_title, content, 
+      position, admin_id, deleted_at, 
+      status, image, created_at, 
+      updated_at, collect_count, share_type, 
+      show_goback, forge_collect_count, region_code
+      )
+    values (#{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{position,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, #{deletedAt,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{collectCount,jdbcType=INTEGER}, #{shareType,jdbcType=INTEGER}, 
+      #{showGoback,jdbcType=INTEGER}, #{forgeCollectCount,jdbcType=INTEGER}, #{regionCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotes">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_strategy_notes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subTitle != null">
+        sub_title,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="collectCount != null">
+        collect_count,
+      </if>
+      <if test="shareType != null">
+        share_type,
+      </if>
+      <if test="showGoback != null">
+        show_goback,
+      </if>
+      <if test="forgeCollectCount != null">
+        forge_collect_count,
+      </if>
+      <if test="regionCode != null">
+        region_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectCount != null">
+        #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareType != null">
+        #{shareType,jdbcType=INTEGER},
+      </if>
+      <if test="showGoback != null">
+        #{showGoback,jdbcType=INTEGER},
+      </if>
+      <if test="forgeCollectCount != null">
+        #{forgeCollectCount,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotesExample" resultType="java.lang.Long">
+    select count(*) from business_strategy_notes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update business_strategy_notes
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subTitle != null">
+        sub_title = #{record.subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.collectCount != null">
+        collect_count = #{record.collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.shareType != null">
+        share_type = #{record.shareType,jdbcType=INTEGER},
+      </if>
+      <if test="record.showGoback != null">
+        show_goback = #{record.showGoback,jdbcType=INTEGER},
+      </if>
+      <if test="record.forgeCollectCount != null">
+        forge_collect_count = #{record.forgeCollectCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionCode != null">
+        region_code = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update business_strategy_notes
+    set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      sub_title = #{record.subTitle,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      image = #{record.image,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      collect_count = #{record.collectCount,jdbcType=INTEGER},
+      share_type = #{record.shareType,jdbcType=INTEGER},
+      show_goback = #{record.showGoback,jdbcType=INTEGER},
+      forge_collect_count = #{record.forgeCollectCount,jdbcType=INTEGER},
+      region_code = #{record.regionCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotes">
+    update business_strategy_notes
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectCount != null">
+        collect_count = #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareType != null">
+        share_type = #{shareType,jdbcType=INTEGER},
+      </if>
+      <if test="showGoback != null">
+        show_goback = #{showGoback,jdbcType=INTEGER},
+      </if>
+      <if test="forgeCollectCount != null">
+        forge_collect_count = #{forgeCollectCount,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        region_code = #{regionCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aranya.mall.tiny.mbg.model.BusinessStrategyNotes">
+    update business_strategy_notes
+    set title = #{title,jdbcType=VARCHAR},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      position = #{position,jdbcType=INTEGER},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      collect_count = #{collectCount,jdbcType=INTEGER},
+      share_type = #{shareType,jdbcType=INTEGER},
+      show_goback = #{showGoback,jdbcType=INTEGER},
+      forge_collect_count = #{forgeCollectCount,jdbcType=INTEGER},
+      region_code = #{regionCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

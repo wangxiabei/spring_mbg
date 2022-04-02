@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.dao.takeout.TakeoutTagDao">
+    <select id="selectByRestaurantId" resultMap="com.aranya.mall.tiny.mbg.mapper.TakeoutTagsMapper.BaseResultMap">
+        select takeout_tags.id,takeout_tags.name from takeout_tags
+        LEFT JOIN takeout_restaurant_tags on takeout_restaurant_tags.tag_id=takeout_tags.id
+        where takeout_restaurant_tags.restaurant_id = #{id} and takeout_tags.typee=1
+    </select>
+</mapper>

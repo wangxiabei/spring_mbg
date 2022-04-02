@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.dao.takeout.TakeoutOrderFoodTasteDao">
+    <select id="selectFoodTasteByOrderId" resultMap="com.aranya.mall.tiny.mbg.mapper.TakeoutOrderFoodTastesMapper.BaseResultMap">
+        select * from takeout_order_food_tastes where order_id=#{orderId}
+    </select>
+    <select id="selectFoodTasteByOrderFoodId" resultMap="com.aranya.mall.tiny.mbg.mapper.TakeoutOrderFoodTastesMapper.ResultMap">
+        select * from takeout_order_food_tastes where order_food_id=#{orderFoodId}
+    </select>
+</mapper>

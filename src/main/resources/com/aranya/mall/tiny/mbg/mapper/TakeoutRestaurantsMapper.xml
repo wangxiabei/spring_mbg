@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.mbg.mapper.TakeoutRestaurantsMapper">
+  <resultMap id="BaseResultMap" type="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="boss_id" jdbcType="INTEGER" property="bossId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="delivery_fastest_time" jdbcType="INTEGER" property="deliveryFastestTime" />
+    <result column="delivery_slowest_time" jdbcType="INTEGER" property="deliverySlowestTime" />
+    <result column="is_breakfast" jdbcType="INTEGER" property="isBreakfast" />
+    <result column="is_lunch" jdbcType="INTEGER" property="isLunch" />
+    <result column="is_dinner" jdbcType="INTEGER" property="isDinner" />
+    <result column="breakfast_start_at" jdbcType="TIME" property="breakfastStartAt" />
+    <result column="breakfast_end_at" jdbcType="TIME" property="breakfastEndAt" />
+    <result column="lunch_start_at" jdbcType="TIME" property="lunchStartAt" />
+    <result column="lunch_end_at" jdbcType="TIME" property="lunchEndAt" />
+    <result column="dinner_start_at" jdbcType="TIME" property="dinnerStartAt" />
+    <result column="dinner_end_at" jdbcType="TIME" property="dinnerEndAt" />
+    <result column="overall_star" jdbcType="INTEGER" property="overallStar" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+    <result column="big_img" jdbcType="VARCHAR" property="bigImg" />
+    <result column="tableware_price" jdbcType="NUMERIC" property="tablewarePrice" />
+    <result column="package_price" jdbcType="NUMERIC" property="packagePrice" />
+    <result column="takeout_rule" jdbcType="VARCHAR" property="takeoutRule" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="identifier" jdbcType="VARCHAR" property="identifier" />
+    <result column="breakfast_name" jdbcType="VARCHAR" property="breakfastName" />
+    <result column="lunch_name" jdbcType="VARCHAR" property="lunchName" />
+    <result column="dinner_name" jdbcType="VARCHAR" property="dinnerName" />
+    <result column="list_img" jdbcType="VARCHAR" property="listImg" />
+    <result column="detail_img" jdbcType="VARCHAR" property="detailImg" />
+    <result column="sales_num" jdbcType="INTEGER" property="salesNum" />
+    <result column="online_status" jdbcType="INTEGER" property="onlineStatus" />
+    <result column="order_min_price" jdbcType="NUMERIC" property="orderMinPrice" />
+    <result column="delivery_type" jdbcType="ARRAY" property="deliveryType" />
+    <result column="pick_place" jdbcType="VARCHAR" property="pickPlace" />
+    <result column="pick_time_type" jdbcType="INTEGER" property="pickTimeType" />
+    <result column="project_source" jdbcType="VARCHAR" property="projectSource" />
+    <result column="order_list_img" jdbcType="VARCHAR" property="orderListImg" />
+    <result column="business_times_desc" jdbcType="VARCHAR" property="businessTimesDesc" />
+    <result column="online_status_content" jdbcType="VARCHAR" property="onlineStatusContent" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
+    <result column="delivery_time_type" jdbcType="INTEGER" property="deliveryTimeType" />
+    <result column="remark_placeholder" jdbcType="VARCHAR" property="remarkPlaceholder" />
+    <result column="remark_is_require" jdbcType="INTEGER" property="remarkIsRequire" />
+    <result column="region_code" jdbcType="VARCHAR" property="regionCode" />
+    <result column="take_food_date" jdbcType="VARCHAR" property="takeFoodDate" />
+    <result column="dinner_type" jdbcType="INTEGER" property="dinnerType" />
+    <result column="dinner_pay_type" jdbcType="INTEGER" property="dinnerPayType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, admin_id, boss_id, department_id, status, delivery_fastest_time, delivery_slowest_time, 
+    is_breakfast, is_lunch, is_dinner, breakfast_start_at, breakfast_end_at, lunch_start_at, 
+    lunch_end_at, dinner_start_at, dinner_end_at, overall_star, comment_count, pay_type, 
+    big_img, tableware_price, package_price, takeout_rule, remark, deleted_at, created_at, 
+    updated_at, sort, like_count, phone, identifier, breakfast_name, lunch_name, dinner_name, 
+    list_img, detail_img, sales_num, online_status, order_min_price, delivery_type, pick_place, 
+    pick_time_type, project_source, order_list_img, business_times_desc, online_status_content, 
+    is_show, delivery_time_type, remark_placeholder, remark_is_require, region_code, 
+    take_food_date, dinner_type, dinner_pay_type
+  </sql>
+  <select id="selectByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurantsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from takeout_restaurants
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from takeout_restaurants
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from takeout_restaurants
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurantsExample">
+    delete from takeout_restaurants
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into takeout_restaurants (name, admin_id, boss_id, 
+      department_id, status, delivery_fastest_time, 
+      delivery_slowest_time, is_breakfast, is_lunch, 
+      is_dinner, breakfast_start_at, breakfast_end_at, 
+      lunch_start_at, lunch_end_at, dinner_start_at, 
+      dinner_end_at, overall_star, comment_count, 
+      pay_type, big_img, tableware_price, 
+      package_price, takeout_rule, remark, 
+      deleted_at, created_at, updated_at, 
+      sort, like_count, phone, 
+      identifier, breakfast_name, lunch_name, 
+      dinner_name, list_img, detail_img, 
+      sales_num, online_status, order_min_price, 
+      delivery_type, pick_place, pick_time_type, 
+      project_source, order_list_img, business_times_desc, 
+      online_status_content, is_show, delivery_time_type, 
+      remark_placeholder, remark_is_require, region_code, 
+      take_food_date, dinner_type, dinner_pay_type
+      )
+    values (#{name,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, #{bossId,jdbcType=INTEGER}, 
+      #{departmentId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{deliveryFastestTime,jdbcType=INTEGER}, 
+      #{deliverySlowestTime,jdbcType=INTEGER}, #{isBreakfast,jdbcType=INTEGER}, #{isLunch,jdbcType=INTEGER}, 
+      #{isDinner,jdbcType=INTEGER}, #{breakfastStartAt,jdbcType=TIME}, #{breakfastEndAt,jdbcType=TIME}, 
+      #{lunchStartAt,jdbcType=TIME}, #{lunchEndAt,jdbcType=TIME}, #{dinnerStartAt,jdbcType=TIME}, 
+      #{dinnerEndAt,jdbcType=TIME}, #{overallStar,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{payType,jdbcType=VARCHAR}, #{bigImg,jdbcType=VARCHAR}, #{tablewarePrice,jdbcType=NUMERIC}, 
+      #{packagePrice,jdbcType=NUMERIC}, #{takeoutRule,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{identifier,jdbcType=VARCHAR}, #{breakfastName,jdbcType=VARCHAR}, #{lunchName,jdbcType=VARCHAR}, 
+      #{dinnerName,jdbcType=VARCHAR}, #{listImg,jdbcType=VARCHAR}, #{detailImg,jdbcType=VARCHAR}, 
+      #{salesNum,jdbcType=INTEGER}, #{onlineStatus,jdbcType=INTEGER}, #{orderMinPrice,jdbcType=NUMERIC}, 
+      #{deliveryType,jdbcType=ARRAY}, #{pickPlace,jdbcType=VARCHAR}, #{pickTimeType,jdbcType=INTEGER}, 
+      #{projectSource,jdbcType=VARCHAR}, #{orderListImg,jdbcType=VARCHAR}, #{businessTimesDesc,jdbcType=VARCHAR}, 
+      #{onlineStatusContent,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER}, #{deliveryTimeType,jdbcType=INTEGER}, 
+      #{remarkPlaceholder,jdbcType=VARCHAR}, #{remarkIsRequire,jdbcType=INTEGER}, #{regionCode,jdbcType=VARCHAR}, 
+      #{takeFoodDate,jdbcType=VARCHAR}, #{dinnerType,jdbcType=INTEGER}, #{dinnerPayType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into takeout_restaurants
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="bossId != null">
+        boss_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="deliveryFastestTime != null">
+        delivery_fastest_time,
+      </if>
+      <if test="deliverySlowestTime != null">
+        delivery_slowest_time,
+      </if>
+      <if test="isBreakfast != null">
+        is_breakfast,
+      </if>
+      <if test="isLunch != null">
+        is_lunch,
+      </if>
+      <if test="isDinner != null">
+        is_dinner,
+      </if>
+      <if test="breakfastStartAt != null">
+        breakfast_start_at,
+      </if>
+      <if test="breakfastEndAt != null">
+        breakfast_end_at,
+      </if>
+      <if test="lunchStartAt != null">
+        lunch_start_at,
+      </if>
+      <if test="lunchEndAt != null">
+        lunch_end_at,
+      </if>
+      <if test="dinnerStartAt != null">
+        dinner_start_at,
+      </if>
+      <if test="dinnerEndAt != null">
+        dinner_end_at,
+      </if>
+      <if test="overallStar != null">
+        overall_star,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="bigImg != null">
+        big_img,
+      </if>
+      <if test="tablewarePrice != null">
+        tableware_price,
+      </if>
+      <if test="packagePrice != null">
+        package_price,
+      </if>
+      <if test="takeoutRule != null">
+        takeout_rule,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="identifier != null">
+        identifier,
+      </if>
+      <if test="breakfastName != null">
+        breakfast_name,
+      </if>
+      <if test="lunchName != null">
+        lunch_name,
+      </if>
+      <if test="dinnerName != null">
+        dinner_name,
+      </if>
+      <if test="listImg != null">
+        list_img,
+      </if>
+      <if test="detailImg != null">
+        detail_img,
+      </if>
+      <if test="salesNum != null">
+        sales_num,
+      </if>
+      <if test="onlineStatus != null">
+        online_status,
+      </if>
+      <if test="orderMinPrice != null">
+        order_min_price,
+      </if>
+      <if test="deliveryType != null">
+        delivery_type,
+      </if>
+      <if test="pickPlace != null">
+        pick_place,
+      </if>
+      <if test="pickTimeType != null">
+        pick_time_type,
+      </if>
+      <if test="projectSource != null">
+        project_source,
+      </if>
+      <if test="orderListImg != null">
+        order_list_img,
+      </if>
+      <if test="businessTimesDesc != null">
+        business_times_desc,
+      </if>
+      <if test="onlineStatusContent != null">
+        online_status_content,
+      </if>
+      <if test="isShow != null">
+        is_show,
+      </if>
+      <if test="deliveryTimeType != null">
+        delivery_time_type,
+      </if>
+      <if test="remarkPlaceholder != null">
+        remark_placeholder,
+      </if>
+      <if test="remarkIsRequire != null">
+        remark_is_require,
+      </if>
+      <if test="regionCode != null">
+        region_code,
+      </if>
+      <if test="takeFoodDate != null">
+        take_food_date,
+      </if>
+      <if test="dinnerType != null">
+        dinner_type,
+      </if>
+      <if test="dinnerPayType != null">
+        dinner_pay_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="bossId != null">
+        #{bossId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryFastestTime != null">
+        #{deliveryFastestTime,jdbcType=INTEGER},
+      </if>
+      <if test="deliverySlowestTime != null">
+        #{deliverySlowestTime,jdbcType=INTEGER},
+      </if>
+      <if test="isBreakfast != null">
+        #{isBreakfast,jdbcType=INTEGER},
+      </if>
+      <if test="isLunch != null">
+        #{isLunch,jdbcType=INTEGER},
+      </if>
+      <if test="isDinner != null">
+        #{isDinner,jdbcType=INTEGER},
+      </if>
+      <if test="breakfastStartAt != null">
+        #{breakfastStartAt,jdbcType=TIME},
+      </if>
+      <if test="breakfastEndAt != null">
+        #{breakfastEndAt,jdbcType=TIME},
+      </if>
+      <if test="lunchStartAt != null">
+        #{lunchStartAt,jdbcType=TIME},
+      </if>
+      <if test="lunchEndAt != null">
+        #{lunchEndAt,jdbcType=TIME},
+      </if>
+      <if test="dinnerStartAt != null">
+        #{dinnerStartAt,jdbcType=TIME},
+      </if>
+      <if test="dinnerEndAt != null">
+        #{dinnerEndAt,jdbcType=TIME},
+      </if>
+      <if test="overallStar != null">
+        #{overallStar,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="bigImg != null">
+        #{bigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="tablewarePrice != null">
+        #{tablewarePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="packagePrice != null">
+        #{packagePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="takeoutRule != null">
+        #{takeoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="breakfastName != null">
+        #{breakfastName,jdbcType=VARCHAR},
+      </if>
+      <if test="lunchName != null">
+        #{lunchName,jdbcType=VARCHAR},
+      </if>
+      <if test="dinnerName != null">
+        #{dinnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="listImg != null">
+        #{listImg,jdbcType=VARCHAR},
+      </if>
+      <if test="detailImg != null">
+        #{detailImg,jdbcType=VARCHAR},
+      </if>
+      <if test="salesNum != null">
+        #{salesNum,jdbcType=INTEGER},
+      </if>
+      <if test="onlineStatus != null">
+        #{onlineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderMinPrice != null">
+        #{orderMinPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryType != null">
+        #{deliveryType,jdbcType=ARRAY},
+      </if>
+      <if test="pickPlace != null">
+        #{pickPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="pickTimeType != null">
+        #{pickTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="projectSource != null">
+        #{projectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="orderListImg != null">
+        #{orderListImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTimesDesc != null">
+        #{businessTimesDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineStatusContent != null">
+        #{onlineStatusContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryTimeType != null">
+        #{deliveryTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="remarkPlaceholder != null">
+        #{remarkPlaceholder,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkIsRequire != null">
+        #{remarkIsRequire,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="takeFoodDate != null">
+        #{takeFoodDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dinnerType != null">
+        #{dinnerType,jdbcType=INTEGER},
+      </if>
+      <if test="dinnerPayType != null">
+        #{dinnerPayType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurantsExample" resultType="java.lang.Long">
+    select count(*) from takeout_restaurants
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update takeout_restaurants
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bossId != null">
+        boss_id = #{record.bossId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliveryFastestTime != null">
+        delivery_fastest_time = #{record.deliveryFastestTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverySlowestTime != null">
+        delivery_slowest_time = #{record.deliverySlowestTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.isBreakfast != null">
+        is_breakfast = #{record.isBreakfast,jdbcType=INTEGER},
+      </if>
+      <if test="record.isLunch != null">
+        is_lunch = #{record.isLunch,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDinner != null">
+        is_dinner = #{record.isDinner,jdbcType=INTEGER},
+      </if>
+      <if test="record.breakfastStartAt != null">
+        breakfast_start_at = #{record.breakfastStartAt,jdbcType=TIME},
+      </if>
+      <if test="record.breakfastEndAt != null">
+        breakfast_end_at = #{record.breakfastEndAt,jdbcType=TIME},
+      </if>
+      <if test="record.lunchStartAt != null">
+        lunch_start_at = #{record.lunchStartAt,jdbcType=TIME},
+      </if>
+      <if test="record.lunchEndAt != null">
+        lunch_end_at = #{record.lunchEndAt,jdbcType=TIME},
+      </if>
+      <if test="record.dinnerStartAt != null">
+        dinner_start_at = #{record.dinnerStartAt,jdbcType=TIME},
+      </if>
+      <if test="record.dinnerEndAt != null">
+        dinner_end_at = #{record.dinnerEndAt,jdbcType=TIME},
+      </if>
+      <if test="record.overallStar != null">
+        overall_star = #{record.overallStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentCount != null">
+        comment_count = #{record.commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigImg != null">
+        big_img = #{record.bigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tablewarePrice != null">
+        tableware_price = #{record.tablewarePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.packagePrice != null">
+        package_price = #{record.packagePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.takeoutRule != null">
+        takeout_rule = #{record.takeoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.likeCount != null">
+        like_count = #{record.likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identifier != null">
+        identifier = #{record.identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.breakfastName != null">
+        breakfast_name = #{record.breakfastName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lunchName != null">
+        lunch_name = #{record.lunchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dinnerName != null">
+        dinner_name = #{record.dinnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listImg != null">
+        list_img = #{record.listImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailImg != null">
+        detail_img = #{record.detailImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesNum != null">
+        sales_num = #{record.salesNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.onlineStatus != null">
+        online_status = #{record.onlineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderMinPrice != null">
+        order_min_price = #{record.orderMinPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.deliveryType != null">
+        delivery_type = #{record.deliveryType,jdbcType=ARRAY},
+      </if>
+      <if test="record.pickPlace != null">
+        pick_place = #{record.pickPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pickTimeType != null">
+        pick_time_type = #{record.pickTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectSource != null">
+        project_source = #{record.projectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderListImg != null">
+        order_list_img = #{record.orderListImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTimesDesc != null">
+        business_times_desc = #{record.businessTimesDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineStatusContent != null">
+        online_status_content = #{record.onlineStatusContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isShow != null">
+        is_show = #{record.isShow,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliveryTimeType != null">
+        delivery_time_type = #{record.deliveryTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.remarkPlaceholder != null">
+        remark_placeholder = #{record.remarkPlaceholder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkIsRequire != null">
+        remark_is_require = #{record.remarkIsRequire,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionCode != null">
+        region_code = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.takeFoodDate != null">
+        take_food_date = #{record.takeFoodDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dinnerType != null">
+        dinner_type = #{record.dinnerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.dinnerPayType != null">
+        dinner_pay_type = #{record.dinnerPayType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update takeout_restaurants
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      boss_id = #{record.bossId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      delivery_fastest_time = #{record.deliveryFastestTime,jdbcType=INTEGER},
+      delivery_slowest_time = #{record.deliverySlowestTime,jdbcType=INTEGER},
+      is_breakfast = #{record.isBreakfast,jdbcType=INTEGER},
+      is_lunch = #{record.isLunch,jdbcType=INTEGER},
+      is_dinner = #{record.isDinner,jdbcType=INTEGER},
+      breakfast_start_at = #{record.breakfastStartAt,jdbcType=TIME},
+      breakfast_end_at = #{record.breakfastEndAt,jdbcType=TIME},
+      lunch_start_at = #{record.lunchStartAt,jdbcType=TIME},
+      lunch_end_at = #{record.lunchEndAt,jdbcType=TIME},
+      dinner_start_at = #{record.dinnerStartAt,jdbcType=TIME},
+      dinner_end_at = #{record.dinnerEndAt,jdbcType=TIME},
+      overall_star = #{record.overallStar,jdbcType=INTEGER},
+      comment_count = #{record.commentCount,jdbcType=INTEGER},
+      pay_type = #{record.payType,jdbcType=VARCHAR},
+      big_img = #{record.bigImg,jdbcType=VARCHAR},
+      tableware_price = #{record.tablewarePrice,jdbcType=NUMERIC},
+      package_price = #{record.packagePrice,jdbcType=NUMERIC},
+      takeout_rule = #{record.takeoutRule,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      like_count = #{record.likeCount,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      identifier = #{record.identifier,jdbcType=VARCHAR},
+      breakfast_name = #{record.breakfastName,jdbcType=VARCHAR},
+      lunch_name = #{record.lunchName,jdbcType=VARCHAR},
+      dinner_name = #{record.dinnerName,jdbcType=VARCHAR},
+      list_img = #{record.listImg,jdbcType=VARCHAR},
+      detail_img = #{record.detailImg,jdbcType=VARCHAR},
+      sales_num = #{record.salesNum,jdbcType=INTEGER},
+      online_status = #{record.onlineStatus,jdbcType=INTEGER},
+      order_min_price = #{record.orderMinPrice,jdbcType=NUMERIC},
+      delivery_type = #{record.deliveryType,jdbcType=ARRAY},
+      pick_place = #{record.pickPlace,jdbcType=VARCHAR},
+      pick_time_type = #{record.pickTimeType,jdbcType=INTEGER},
+      project_source = #{record.projectSource,jdbcType=VARCHAR},
+      order_list_img = #{record.orderListImg,jdbcType=VARCHAR},
+      business_times_desc = #{record.businessTimesDesc,jdbcType=VARCHAR},
+      online_status_content = #{record.onlineStatusContent,jdbcType=VARCHAR},
+      is_show = #{record.isShow,jdbcType=INTEGER},
+      delivery_time_type = #{record.deliveryTimeType,jdbcType=INTEGER},
+      remark_placeholder = #{record.remarkPlaceholder,jdbcType=VARCHAR},
+      remark_is_require = #{record.remarkIsRequire,jdbcType=INTEGER},
+      region_code = #{record.regionCode,jdbcType=VARCHAR},
+      take_food_date = #{record.takeFoodDate,jdbcType=VARCHAR},
+      dinner_type = #{record.dinnerType,jdbcType=INTEGER},
+      dinner_pay_type = #{record.dinnerPayType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
+    update takeout_restaurants
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="bossId != null">
+        boss_id = #{bossId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryFastestTime != null">
+        delivery_fastest_time = #{deliveryFastestTime,jdbcType=INTEGER},
+      </if>
+      <if test="deliverySlowestTime != null">
+        delivery_slowest_time = #{deliverySlowestTime,jdbcType=INTEGER},
+      </if>
+      <if test="isBreakfast != null">
+        is_breakfast = #{isBreakfast,jdbcType=INTEGER},
+      </if>
+      <if test="isLunch != null">
+        is_lunch = #{isLunch,jdbcType=INTEGER},
+      </if>
+      <if test="isDinner != null">
+        is_dinner = #{isDinner,jdbcType=INTEGER},
+      </if>
+      <if test="breakfastStartAt != null">
+        breakfast_start_at = #{breakfastStartAt,jdbcType=TIME},
+      </if>
+      <if test="breakfastEndAt != null">
+        breakfast_end_at = #{breakfastEndAt,jdbcType=TIME},
+      </if>
+      <if test="lunchStartAt != null">
+        lunch_start_at = #{lunchStartAt,jdbcType=TIME},
+      </if>
+      <if test="lunchEndAt != null">
+        lunch_end_at = #{lunchEndAt,jdbcType=TIME},
+      </if>
+      <if test="dinnerStartAt != null">
+        dinner_start_at = #{dinnerStartAt,jdbcType=TIME},
+      </if>
+      <if test="dinnerEndAt != null">
+        dinner_end_at = #{dinnerEndAt,jdbcType=TIME},
+      </if>
+      <if test="overallStar != null">
+        overall_star = #{overallStar,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="bigImg != null">
+        big_img = #{bigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="tablewarePrice != null">
+        tableware_price = #{tablewarePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="packagePrice != null">
+        package_price = #{packagePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="takeoutRule != null">
+        takeout_rule = #{takeoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="breakfastName != null">
+        breakfast_name = #{breakfastName,jdbcType=VARCHAR},
+      </if>
+      <if test="lunchName != null">
+        lunch_name = #{lunchName,jdbcType=VARCHAR},
+      </if>
+      <if test="dinnerName != null">
+        dinner_name = #{dinnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="listImg != null">
+        list_img = #{listImg,jdbcType=VARCHAR},
+      </if>
+      <if test="detailImg != null">
+        detail_img = #{detailImg,jdbcType=VARCHAR},
+      </if>
+      <if test="salesNum != null">
+        sales_num = #{salesNum,jdbcType=INTEGER},
+      </if>
+      <if test="onlineStatus != null">
+        online_status = #{onlineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderMinPrice != null">
+        order_min_price = #{orderMinPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryType != null">
+        delivery_type = #{deliveryType,jdbcType=ARRAY},
+      </if>
+      <if test="pickPlace != null">
+        pick_place = #{pickPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="pickTimeType != null">
+        pick_time_type = #{pickTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="projectSource != null">
+        project_source = #{projectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="orderListImg != null">
+        order_list_img = #{orderListImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTimesDesc != null">
+        business_times_desc = #{businessTimesDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineStatusContent != null">
+        online_status_content = #{onlineStatusContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        is_show = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryTimeType != null">
+        delivery_time_type = #{deliveryTimeType,jdbcType=INTEGER},
+      </if>
+      <if test="remarkPlaceholder != null">
+        remark_placeholder = #{remarkPlaceholder,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkIsRequire != null">
+        remark_is_require = #{remarkIsRequire,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        region_code = #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="takeFoodDate != null">
+        take_food_date = #{takeFoodDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dinnerType != null">
+        dinner_type = #{dinnerType,jdbcType=INTEGER},
+      </if>
+      <if test="dinnerPayType != null">
+        dinner_pay_type = #{dinnerPayType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
+    update takeout_restaurants
+    set name = #{name,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      boss_id = #{bossId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      delivery_fastest_time = #{deliveryFastestTime,jdbcType=INTEGER},
+      delivery_slowest_time = #{deliverySlowestTime,jdbcType=INTEGER},
+      is_breakfast = #{isBreakfast,jdbcType=INTEGER},
+      is_lunch = #{isLunch,jdbcType=INTEGER},
+      is_dinner = #{isDinner,jdbcType=INTEGER},
+      breakfast_start_at = #{breakfastStartAt,jdbcType=TIME},
+      breakfast_end_at = #{breakfastEndAt,jdbcType=TIME},
+      lunch_start_at = #{lunchStartAt,jdbcType=TIME},
+      lunch_end_at = #{lunchEndAt,jdbcType=TIME},
+      dinner_start_at = #{dinnerStartAt,jdbcType=TIME},
+      dinner_end_at = #{dinnerEndAt,jdbcType=TIME},
+      overall_star = #{overallStar,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      big_img = #{bigImg,jdbcType=VARCHAR},
+      tableware_price = #{tablewarePrice,jdbcType=NUMERIC},
+      package_price = #{packagePrice,jdbcType=NUMERIC},
+      takeout_rule = #{takeoutRule,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      breakfast_name = #{breakfastName,jdbcType=VARCHAR},
+      lunch_name = #{lunchName,jdbcType=VARCHAR},
+      dinner_name = #{dinnerName,jdbcType=VARCHAR},
+      list_img = #{listImg,jdbcType=VARCHAR},
+      detail_img = #{detailImg,jdbcType=VARCHAR},
+      sales_num = #{salesNum,jdbcType=INTEGER},
+      online_status = #{onlineStatus,jdbcType=INTEGER},
+      order_min_price = #{orderMinPrice,jdbcType=NUMERIC},
+      delivery_type = #{deliveryType,jdbcType=ARRAY},
+      pick_place = #{pickPlace,jdbcType=VARCHAR},
+      pick_time_type = #{pickTimeType,jdbcType=INTEGER},
+      project_source = #{projectSource,jdbcType=VARCHAR},
+      order_list_img = #{orderListImg,jdbcType=VARCHAR},
+      business_times_desc = #{businessTimesDesc,jdbcType=VARCHAR},
+      online_status_content = #{onlineStatusContent,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=INTEGER},
+      delivery_time_type = #{deliveryTimeType,jdbcType=INTEGER},
+      remark_placeholder = #{remarkPlaceholder,jdbcType=VARCHAR},
+      remark_is_require = #{remarkIsRequire,jdbcType=INTEGER},
+      region_code = #{regionCode,jdbcType=VARCHAR},
+      take_food_date = #{takeFoodDate,jdbcType=VARCHAR},
+      dinner_type = #{dinnerType,jdbcType=INTEGER},
+      dinner_pay_type = #{dinnerPayType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

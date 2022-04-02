@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aranya.mall.tiny.mbg.mapper.TakeoutDeliveryRegionPricesMapper">
+  <resultMap id="BaseResultMap" type="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPrices">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="price" jdbcType="NUMERIC" property="price" />
+    <result column="min_price" jdbcType="NUMERIC" property="minPrice" />
+    <result column="max_price" jdbcType="NUMERIC" property="maxPrice" />
+    <result column="restaurant_id" jdbcType="INTEGER" property="restaurantId" />
+    <result column="region_code" jdbcType="VARCHAR" property="regionCode" />
+    <result column="address_parent_id" jdbcType="INTEGER" property="addressParentId" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, price, min_price, max_price, restaurant_id, region_code, address_parent_id, admin_id, 
+    remark, deleted_at, created_at, updated_at
+  </sql>
+  <select id="selectByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPricesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from takeout_delivery_region_prices
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from takeout_delivery_region_prices
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from takeout_delivery_region_prices
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPricesExample">
+    delete from takeout_delivery_region_prices
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPrices">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into takeout_delivery_region_prices (price, min_price, max_price, 
+      restaurant_id, region_code, address_parent_id, 
+      admin_id, remark, deleted_at, 
+      created_at, updated_at)
+    values (#{price,jdbcType=NUMERIC}, #{minPrice,jdbcType=NUMERIC}, #{maxPrice,jdbcType=NUMERIC}, 
+      #{restaurantId,jdbcType=INTEGER}, #{regionCode,jdbcType=VARCHAR}, #{addressParentId,jdbcType=INTEGER}, 
+      #{adminId,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{deletedAt,jdbcType=TIMESTAMP}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPrices">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into takeout_delivery_region_prices
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="price != null">
+        price,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="maxPrice != null">
+        max_price,
+      </if>
+      <if test="restaurantId != null">
+        restaurant_id,
+      </if>
+      <if test="regionCode != null">
+        region_code,
+      </if>
+      <if test="addressParentId != null">
+        address_parent_id,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="price != null">
+        #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="maxPrice != null">
+        #{maxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="restaurantId != null">
+        #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addressParentId != null">
+        #{addressParentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPricesExample" resultType="java.lang.Long">
+    select count(*) from takeout_delivery_region_prices
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update takeout_delivery_region_prices
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=NUMERIC},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.maxPrice != null">
+        max_price = #{record.maxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.restaurantId != null">
+        restaurant_id = #{record.restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionCode != null">
+        region_code = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressParentId != null">
+        address_parent_id = #{record.addressParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update takeout_delivery_region_prices
+    set id = #{record.id,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=NUMERIC},
+      min_price = #{record.minPrice,jdbcType=NUMERIC},
+      max_price = #{record.maxPrice,jdbcType=NUMERIC},
+      restaurant_id = #{record.restaurantId,jdbcType=INTEGER},
+      region_code = #{record.regionCode,jdbcType=VARCHAR},
+      address_parent_id = #{record.addressParentId,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPrices">
+    update takeout_delivery_region_prices
+    <set>
+      <if test="price != null">
+        price = #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="minPrice != null">
+        min_price = #{minPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="maxPrice != null">
+        max_price = #{maxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="restaurantId != null">
+        restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="regionCode != null">
+        region_code = #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addressParentId != null">
+        address_parent_id = #{addressParentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutDeliveryRegionPrices">
+    update takeout_delivery_region_prices
+    set price = #{price,jdbcType=NUMERIC},
+      min_price = #{minPrice,jdbcType=NUMERIC},
+      max_price = #{maxPrice,jdbcType=NUMERIC},
+      restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      region_code = #{regionCode,jdbcType=VARCHAR},
+      address_parent_id = #{addressParentId,jdbcType=INTEGER},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
