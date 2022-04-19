@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-02T14:48:01+0800",
+    date = "2022-04-18T14:15:34+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
 )
 @Component
@@ -25,6 +25,7 @@ public class RestaurantMapperImpl implements RestaurantMapper {
             takeoutRestaurantDto.setId( restaurants.getId() );
         }
         takeoutRestaurantDto.setName( restaurants.getName() );
+        takeoutRestaurantDto.setSort( restaurants.getSort() );
         takeoutRestaurantDto.setDepartmentId( restaurants.getDepartmentId() );
         takeoutRestaurantDto.setStatus( restaurants.getStatus() );
         takeoutRestaurantDto.setDeliveryFastestTime( restaurants.getDeliveryFastestTime() );
@@ -49,6 +50,7 @@ public class RestaurantMapperImpl implements RestaurantMapper {
         takeoutRestaurants.setStatus( dto.getStatus() );
         takeoutRestaurants.setDeliveryFastestTime( dto.getDeliveryFastestTime() );
         takeoutRestaurants.setDeliverySlowestTime( dto.getDeliverySlowestTime() );
+        takeoutRestaurants.setSort( dto.getSort() );
         takeoutRestaurants.setListImg( dto.getListImg() );
         takeoutRestaurants.setDetailImg( dto.getDetailImg() );
 

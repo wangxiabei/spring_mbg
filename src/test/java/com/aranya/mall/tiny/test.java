@@ -111,9 +111,13 @@ public class test {
     }
     @Test
     public void testMybatis() {
-        System.out.println(1111111);
-        System.out.println(service.getById(2));
-        System.out.println(22222222);
+        int x = 0;
+        int y = 10;
+        int posX = 0;
+        int posY = 0;
+        posX+= x;
+        posY+= y;
+        System.out.println("ssss"+posX+","+posY);
     }
 
 }
