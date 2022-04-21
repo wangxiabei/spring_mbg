@@ -126,7 +126,13 @@
 <!--        <table tableName="takeout_delivery_prices">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="takeout_delivery_region_prices">
+<!--        <table tableName="takeout_delivery_region_prices">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="companies">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="departments">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

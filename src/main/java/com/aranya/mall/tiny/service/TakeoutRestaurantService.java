@@ -18,4 +18,7 @@ public interface TakeoutRestaurantService {
 
     int updateRestaurant(TakeoutRestaurantDto dto);
 
+
+    int addRestaurant(TakeoutRestaurantDto dto);
+
 }

@@ -1,6 +1,7 @@
 package com.aranya.mall.tiny.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateTime;
 import com.alibaba.druid.util.StringUtils;
 import com.aranya.mall.tiny.common.api.CommonPage;
 import com.aranya.mall.tiny.dao.takeout.TakeoutTagDao;
@@ -19,10 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class TakeoutServiceImpl implements TakeoutRestaurantService {
@@ -120,6 +118,15 @@ public class TakeoutServiceImpl implements TakeoutRestaurantService {
     public int updateRestaurant(TakeoutRestaurantDto dto) {
         TakeoutRestaurants restaurants =  coverMapper.toDo(dto);
         int count = takeoutRestaurantsMapper.updateByPrimaryKeySelective(restaurants);
+        return count;
+    }
+
+    @Override
+    public int addRestaurant(TakeoutRestaurantDto dto) {
+        TakeoutRestaurants restaurant = coverMapper.toDo(dto);
+        restaurant.setCreatedAt(DateTime.now());
+        restaurant.setUpdatedAt(DateTime.now());
+        int count = takeoutRestaurantsMapper.insertSelective(restaurant);
         return count;
     }
 }

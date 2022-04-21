@@ -158,8 +158,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long" >
+      select nextval('takeout_restaurants_id_seq'::regclass) as id
     </selectKey>
     insert into takeout_restaurants (name, admin_id, boss_id, 
       department_id, status, delivery_fastest_time, 
@@ -201,8 +201,8 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.aranya.mall.tiny.mbg.model.TakeoutRestaurants">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long" >
+      select nextval('takeout_restaurants_id_seq'::regclass) as id
     </selectKey>
     insert into takeout_restaurants
     <trim prefix="(" suffix=")" suffixOverrides=",">

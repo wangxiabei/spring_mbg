@@ -44,5 +44,11 @@ public class restaurantsController {
     public CommonResult update(@RequestBody TakeoutRestaurantDto dto){
         return CommonResult.success(service.updateRestaurant(dto));
     }
+    @PostMapping("/add")
+    @ResponseBody
+    public CommonResult addRestaurant(@RequestBody TakeoutRestaurantDto dto){
+        return CommonResult.success(service.addRestaurant(dto));
+
+    }
 
 }
