@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TakeoutOrderServiceImpl implements TakeoutOrderService {
@@ -42,6 +43,9 @@ public class TakeoutOrderServiceImpl implements TakeoutOrderService {
     private TakeoutDeliveryRegionPricesMapper pricesMapper;
     @Autowired
     private TakeoutOrderFoodsMapper orderFoodsMapper;
+    @Autowired
+    private TakeoutOrderFoodTastesMapper orderFoodTastesMapper;
+
 
     @Autowired
     private OrderMapper coverOrderMapper;
@@ -323,7 +327,39 @@ public class TakeoutOrderServiceImpl implements TakeoutOrderService {
 
     @Override
     public TakeoutOrderDetail orderDetail(long id) {
-        return orderDao.getDetail(id);
+        TakeoutOrderDetail detail = new TakeoutOrderDetail();
+        //订单详情
+        TakeoutOrders orders = takeoutOrdersMapper.selectByPrimaryKey(id);
+        detail.setTakeoutOrders(orders);
+        //订单食物信息
+        TakeoutOrderFoodsExample orderFoodsExample = new TakeoutOrderFoodsExample();
+        orderFoodsExample.createCriteria().andOrderIdEqualTo((int) id);
+        List<TakeoutOrderFoods> orderFoodsList = orderFoodsMapper.selectByExample(orderFoodsExample);
+        detail.setOrderFoodsList(orderFoodsList);
+        //订单食物口味信息
+        TakeoutOrderFoodTastesExample orderFoodTastesExample = new TakeoutOrderFoodTastesExample();
+        List<Long> order_food_ids = orderFoodsList.stream().map(TakeoutOrderFoods::getId).collect(Collectors.toList());
+        orderFoodTastesExample.createCriteria().andOrderFoodIdIn(order_food_ids);
+        List<TakeoutOrderFoodTastes> foodTastesList = orderFoodTastesMapper.selectByExample(orderFoodTastesExample);
+        detail.setOrderFoodTastesList(foodTastesList);
+        return detail;
+
+//        return orderDao.getDetail(id);
+
+
+
+
+    }
+
+    @Override
+    public int updateOrderRemark(TakeoutOrderDto dto) {
+        TakeoutOrders order = coverOrderMapper.toDo(dto);
+        return takeoutOrdersMapper.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
+    public int deleteOrder(long id) {
+        return takeoutOrdersMapper.deleteByPrimaryKey(id);
     }
 
     /**
@@ -362,14 +398,14 @@ public class TakeoutOrderServiceImpl implements TakeoutOrderService {
         return statusChinse;
     }
     //计算口味价格
-    public BigDecimal cultastea(long tastes_id, Integer count){
+    private BigDecimal cultastea(long tastes_id, Integer count){
         BigDecimal taste_amount = new BigDecimal("0");
         TakeoutFoodTastes foodTastes = tastesMapper.selectByPrimaryKey(tastes_id);
         taste_amount = taste_amount.add(foodTastes.getPrice().multiply(BigDecimal.valueOf(count))); //口味
         return taste_amount;
     }
 
-    public int createOrderFood(long orderId, JSONArray food_list_json, Integer restaurantId){
+    private int createOrderFood(long orderId, JSONArray food_list_json, Integer restaurantId){
         TakeoutRestaurants r = restaurantsMapper.selectByPrimaryKey(restaurantId.longValue());
         BigDecimal package_total_count = new BigDecimal("0"); //打包盒总数量
         BigDecimal food_original_total_price = new BigDecimal("0"); //所有餐点和口味的原总价
@@ -442,7 +478,7 @@ public class TakeoutOrderServiceImpl implements TakeoutOrderService {
 //        #                           tastes_id: 2, 口味ID
 //        #                         },
 //        #                           ]
-    public CommonResult createOrderTast(JSONArray tastes_list_json, Integer food_count){
+    private CommonResult createOrderTast(JSONArray tastes_list_json, Integer food_count){
         BigDecimal taste_amount = new BigDecimal("0");
         CommonResult commonResult = null;
         if (tastes_list_json.size() > 1){

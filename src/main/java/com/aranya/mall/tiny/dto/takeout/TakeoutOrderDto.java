@@ -20,4 +20,5 @@ public class TakeoutOrderDto {
     private Integer package_count;
     private String status_name;
     private String delivery_type_name;
+    private String orderRemark;
 }

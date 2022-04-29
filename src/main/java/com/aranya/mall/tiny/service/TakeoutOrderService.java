@@ -24,5 +24,11 @@ public interface TakeoutOrderService {
     TakeoutOrderDetail orderDetail(long id);
 
 
+    int updateOrderRemark(TakeoutOrderDto dto);
+
+
+    int deleteOrder(long id);
+
+
 
 }

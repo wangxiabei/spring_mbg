@@ -55,7 +55,21 @@ public class takeoutOrdersController {
     @GetMapping("/getDetails/{id}")
     @ResponseBody
     public CommonResult getDetail(@PathVariable long id){
-        return null;
+
+        return CommonResult.success(takeoutOrderService.orderDetail(id));
     }
+
+    @PostMapping("/updateOrderRemark/{id}")
+    @ResponseBody
+    public CommonResult updateOrderRemark(@RequestBody TakeoutOrderDto dto){
+        return CommonResult.success(takeoutOrderService.updateOrderRemark(dto));
+    }
+
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public CommonResult deletedOrder(@PathVariable long id ){
+        return CommonResult.success(takeoutOrderService.deleteOrder(id));
+    }
+
 }
 

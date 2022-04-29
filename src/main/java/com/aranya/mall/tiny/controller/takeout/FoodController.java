@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import com.aranya.mall.tiny.common.api.CommonPage;
 import com.aranya.mall.tiny.common.api.CommonResult;
 import com.aranya.mall.tiny.dto.takeout.TakeoutFoodDto;
+import com.aranya.mall.tiny.dto.takeout.TakeoutFoodStockParam;
 import com.aranya.mall.tiny.service.TakeoutFoodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +61,12 @@ public class FoodController {
         }else {
             return CommonResult.fail(500,"失败",null);
         }
+    }
+
+    @PostMapping("/createStock/{id}")
+    @ResponseBody
+    public CommonResult createStock(@PathVariable long id, @RequestBody TakeoutFoodStockParam param){
+        return CommonResult.success(service.setStockDate(param));
     }
 
 }

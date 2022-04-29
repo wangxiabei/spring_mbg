@@ -516,7 +516,7 @@ public class TakeoutOrderFoodTastesExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderFoodIdIn(List<Integer> values) {
+        public Criteria andOrderFoodIdIn(List<Long> values) {
             addCriterion("order_food_id in", values, "orderFoodId");
             return (Criteria) this;
         }

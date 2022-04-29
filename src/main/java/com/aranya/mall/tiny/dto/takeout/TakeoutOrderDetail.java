@@ -8,10 +8,12 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 @Data
-public class TakeoutOrderDetail extends TakeoutOrders {
+public class TakeoutOrderDetail {
 //    private Integer restaurantId;
 //    private String orderNo;
 //    private BigDecimal amount;
+    //订单信息
+    private TakeoutOrders takeoutOrders;
 
     //订单食物
     private List<TakeoutOrderFoods> orderFoodsList;
