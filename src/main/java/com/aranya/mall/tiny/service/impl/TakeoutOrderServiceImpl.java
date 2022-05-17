@@ -327,24 +327,24 @@ public class TakeoutOrderServiceImpl implements TakeoutOrderService {
 
     @Override
     public TakeoutOrderDetail orderDetail(long id) {
-        TakeoutOrderDetail detail = new TakeoutOrderDetail();
-        //订单详情
-        TakeoutOrders orders = takeoutOrdersMapper.selectByPrimaryKey(id);
-        detail.setTakeoutOrders(orders);
-        //订单食物信息
-        TakeoutOrderFoodsExample orderFoodsExample = new TakeoutOrderFoodsExample();
-        orderFoodsExample.createCriteria().andOrderIdEqualTo((int) id);
-        List<TakeoutOrderFoods> orderFoodsList = orderFoodsMapper.selectByExample(orderFoodsExample);
-        detail.setOrderFoodsList(orderFoodsList);
-        //订单食物口味信息
-        TakeoutOrderFoodTastesExample orderFoodTastesExample = new TakeoutOrderFoodTastesExample();
-        List<Long> order_food_ids = orderFoodsList.stream().map(TakeoutOrderFoods::getId).collect(Collectors.toList());
-        orderFoodTastesExample.createCriteria().andOrderFoodIdIn(order_food_ids);
-        List<TakeoutOrderFoodTastes> foodTastesList = orderFoodTastesMapper.selectByExample(orderFoodTastesExample);
-        detail.setOrderFoodTastesList(foodTastesList);
-        return detail;
+//        TakeoutOrderDetail detail = new TakeoutOrderDetail();
+//        //订单详情
+//        TakeoutOrders orders = takeoutOrdersMapper.selectByPrimaryKey(id);
+//        detail.setTakeoutOrders(orders);
+//        //订单食物信息
+//        TakeoutOrderFoodsExample orderFoodsExample = new TakeoutOrderFoodsExample();
+//        orderFoodsExample.createCriteria().andOrderIdEqualTo((int) id);
+//        List<TakeoutOrderFoods> orderFoodsList = orderFoodsMapper.selectByExample(orderFoodsExample);
+//        detail.setOrderFoodsList(orderFoodsList);
+//        //订单食物口味信息
+//        TakeoutOrderFoodTastesExample orderFoodTastesExample = new TakeoutOrderFoodTastesExample();
+//        List<Long> order_food_ids = orderFoodsList.stream().map(TakeoutOrderFoods::getId).collect(Collectors.toList());
+//        orderFoodTastesExample.createCriteria().andOrderFoodIdIn(order_food_ids);
+//        List<TakeoutOrderFoodTastes> foodTastesList = orderFoodTastesMapper.selectByExample(orderFoodTastesExample);
+//        detail.setOrderFoodTastesList(foodTastesList);
+//        return detail;
 
-//        return orderDao.getDetail(id);
+        return orderDao.getDetail(id);
 
 
 

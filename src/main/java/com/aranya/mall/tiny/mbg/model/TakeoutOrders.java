@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -185,9 +186,9 @@ public class TakeoutOrders implements Serializable {
 //    //用户信息
 //    private Users user;
 //    //订单食物信息
-//    private List<TakeoutOrderFoods> orderFoodsList;
+    private List<TakeoutOrderFoods> orderFoodsList;
 //    //订单食物口味信息
-//    private List<TakeoutOrderFoodTastes> orderFoodTastesList;
+    private List<TakeoutOrderFoodTastes> orderFoodTastesList;
 
     private static final long serialVersionUID = 1L;
 

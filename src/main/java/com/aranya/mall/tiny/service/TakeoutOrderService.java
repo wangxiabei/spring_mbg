@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TakeoutOrderService {
     CommonPage<TakeoutOrders> getAllOrder(long userId, Integer pageNum, Integer pageSize);
