@@ -14,5 +14,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
         logger.info("springBoot启动啦");
         logger.info("springBoot启动啦");
+        logger.info("springBoot启动啦");
     }
 }
